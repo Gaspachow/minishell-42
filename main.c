@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 12:04:28 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/11 17:45:39 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/01/11 19:01:02 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	main(void)
 		i = 0;
 		ft_putstr("minishell> ");
 		get_next_line(0, &user_input);
-		inputs = ft_split(user_input, ' ');
+		inputs = input_split(user_input, ' ');
 		parser(inputs);
 
 	}
