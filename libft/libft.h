@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/07 11:25:57 by gsmets            #+#    #+#             */
-/*   Updated: 2021/01/11 12:24:46 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/01/11 13:31:33 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,6 @@ int				get_next_line(int fd, char **line);
 int				create_line(char **str, char **line);
 int				check_nl(char *str);
 int				last_line(char **str, char **line);
-int				mega_error(char *str1,char *str2);
+int				mega_error(char *str1, char *str2);
 
 #endif
