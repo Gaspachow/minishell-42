@@ -9,7 +9,7 @@ SRCS	+= ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_calloc.
 
 SRCS	+= ft_lstadd_back.c ft_lstadd_front.c ft_lstclear.c ft_lstdelone.c ft_lstiter.c ft_lstlast.c ft_lstmap.c
 
-SRCS	+= ft_lstnew.c ft_lstsize.c
+SRCS	+= ft_lstnew.c ft_lstsize.c ft_putstr.c ft_strcat.c ft_strcmp.c ft_strcpy.c ft_strncat.c ft_strncpy.c ft_strstr.c
 
 SRCS	+= ft_putnbr.c ft_putunbr.c ft_puthexnbr.c ft_putchar.c ft_putptrnbr.c
 
@@ -17,11 +17,10 @@ OBJS	= $(SRCS:.c=.o)
 
 NAME	= libft.a
 
-GCC		= gcc
+GCC		= clang
 
 FLAGS	= -Wall -Wextra -Werror
 
-INCLUDEH	= -L .
 
 
 
@@ -41,7 +40,7 @@ fclean: clean
 re: fclean all
 
 %.o: %.c
-	$(GCC) $(FLAGS) $(INCLUDEH) -c $<  -o $(<:.c=.o)
+	$(GCC) $(FLAGS) -c $<  -o $(<:.c=.o)
 
 bench:
 	@echo "Creating shared object 'libft.so' ..."

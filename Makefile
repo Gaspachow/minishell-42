@@ -13,9 +13,8 @@ CLANG	= clang
 
 FLAGS	= -Wall -Wextra -Werror
 
-INCLUDE	= -L . -lft
+INCLUDE	= -L libft -lft
 
-INCLUDEH = -L .
 
 
 
@@ -25,7 +24,6 @@ all:	$(NAME)
 
 $(NAME): $(OBJS)
 	cd libft && $(MAKE)
-	cp libft/libft.a libft.a
 	$(CLANG) $(FLAGS) -o $(NAME) $(OBJS) $(INCLUDE)
 
 clean:
@@ -39,5 +37,5 @@ fclean: clean
 re: fclean all
 
 %.o: %.c
-	$(GCC) $(FLAGS) $(INCLUDEH) -c $<  -o $(<:.c=.o)
+	$(CLANG) $(FLAGS) -c $<  -o $(<:.c=.o)
 

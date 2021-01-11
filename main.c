@@ -1,9 +1,6 @@
 #include "libft/libft.h"
 
-void ft_pustr(char *str);
-
 int main() {
-
-    ft_putstr("COUCOU\n");
+    ft_putstr("coucou");
     return (0);
 }
