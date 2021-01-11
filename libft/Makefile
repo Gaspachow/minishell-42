@@ -13,6 +13,8 @@ SRCS	+= ft_lstnew.c ft_lstsize.c ft_putstr.c ft_strcat.c ft_strcmp.c ft_strcpy.c
 
 SRCS	+= ft_putnbr.c ft_putunbr.c ft_puthexnbr.c ft_putchar.c ft_putptrnbr.c
 
+SRCS	+= get_next_line.c
+
 OBJS	= $(SRCS:.c=.o)
 
 NAME	= libft.a
