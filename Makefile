@@ -1,6 +1,8 @@
 
 SRCS	= main.c
 
+SRCS	+= builtins/echo.c
+
 LIBFT	= libft/libft.a
 
 OBJS	= $(SRCS:.c=.o)
