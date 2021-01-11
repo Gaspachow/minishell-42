@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 12:03:49 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/11 17:07:52 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/01/11 18:34:58 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,9 @@
 # include <dirent.h>
 # include "libft/libft.h"
 
-int handle_echo(char **args);
 int	parser(char **inputs);
+
+int handle_echo(char **args);
+int	handle_pwd(void);
 
 #endif

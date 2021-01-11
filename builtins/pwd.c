@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/11 17:45:05 by gsmets            #+#    #+#             */
-/*   Updated: 2021/01/11 18:36:50 by tpons            ###   ########.fr       */
+/*   Created: 2021/01/11 17:48:49 by tpons             #+#    #+#             */
+/*   Updated: 2021/01/11 18:32:23 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	parser(char **inputs)
+int	handle_pwd(void)
 {
-	if (!*inputs)
-		return (0);
-	if (!ft_strcmp(inputs[0], "echo"))
-		handle_echo(inputs);
-	else if (!ft_strcmp(inputs[0], "pwd"))
-		handle_pwd();
-	else
-		write(1, "try again\n", 10);
+	char	*buf;
+
+	buf = getcwd(NULL, 0);
+	ft_putstr(buf);
+	free(buf);
+	ft_putstr("\n");
 	return (0);
 }

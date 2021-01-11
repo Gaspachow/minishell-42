@@ -1,7 +1,9 @@
 
 SRCS	= main.c
 
-SRCS	+= builtins/echo.c
+SRCS	+= parser/parser.c
+
+SRCS	+= builtins/echo.c builtins/pwd.c
 
 LIBFT	= libft/libft.a
 
