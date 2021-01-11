@@ -1,19 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/11 12:04:28 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/11 12:33:25 by tpons            ###   ########.fr       */
+/*   Created: 2021/01/11 12:03:49 by tpons             #+#    #+#             */
+/*   Updated: 2021/01/11 12:33:29 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef MINISHELL_H
+# define MINISHELL_H
 
-int main()
-{
-    ft_putstr("coucou");
-    return (0);
-}
+# include <term.h>
+# include <curses.h>
+# include <termios.h>
+# include <stdint.h>
+# include <sys/ioctl.h>
+
+# include <stdlib.h>
+# include <unistd.h>
+# include <sys/wait.h>
+# include <sys/stat.h>
+# include <errno.h>
+# include <signal.h>
+# include <dirent.h>
+# include "libft/libft.h"
+
+#endif
