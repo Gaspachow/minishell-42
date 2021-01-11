@@ -6,7 +6,7 @@
 /*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 12:04:28 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/11 13:37:22 by tpons            ###   ########.fr       */
+/*   Updated: 2021/01/11 16:20:19 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,23 @@
 
 int	main(void)
 {
-	char *line;
+	char	*user_input;
+	char	**input;
+	int		i;
 
+	user_input = NULL;
+	input= NULL;
 	while (1)
 	{
-		line = malloc(sizeof(char));
-		if (!line)
-			return (1);
-		ft_putstr("minishell>");
-		get_next_line(0, &line);
-		ft_putstr(line);
+		i = 0;
+		ft_putstr("minishell> ");
+		get_next_line(0, &user_input);
+		input = ft_split(user_input, ' ');
+		while (input[i])
+		{
+			ft_putstr(input[i++]);
+			ft_putstr("\n");
+		}
 		ft_putstr("\n");
 	}
 	return (0);
