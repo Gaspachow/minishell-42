@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/07 11:25:57 by gsmets            #+#    #+#             */
-/*   Updated: 2019/11/15 14:57:10 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/01/11 12:10:07 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include <string.h>
 # include <stdlib.h>
+# include <stdio.h>
+# include <unistd.h>
 
 typedef struct	s_list
 {
@@ -77,5 +79,10 @@ void			ft_putnbr(int n);
 void			ft_putunbr(unsigned int n);
 void			ft_puthexnbr(unsigned int n, int allcaps);
 void			ft_putptrnbr(unsigned long long n, int allcaps);
+int				get_next_line(int fd, char **line);
+int				create_line(char **str, char **line);
+int				check_nl(char *str);
+int				last_line(char **str, char **line);
+int				mega_error(char *str1,char *str2);
 
 #endif
