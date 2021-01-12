@@ -6,9 +6,10 @@
 /*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 12:04:28 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/12 15:43:37 by tpons            ###   ########.fr       */
+/*   Updated: 2021/01/12 15:46:36 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "minishell.h"
 
@@ -28,8 +29,7 @@ int	main(int ac, char **av, char **env)
 		i = 0;
 		ft_putstr("minishell> ");
 		get_next_line(0, &user_input);
-		inputs = input_split(user_input, ' ');
-		parser(inputs);
+		parser(user_input);
 
 	}
 	return (0);

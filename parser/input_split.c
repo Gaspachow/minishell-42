@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   input_split.c                                   :+:      :+:    :+:   */
+/*   input_split.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 17:50:50 by gsmets            #+#    #+#             */
-/*   Updated: 2021/01/11 18:05:30 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/01/12 12:53:46 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
 
-static int		isEmptyString(const char *str)
+static int		isemptystring(const char *str)
 {
 	if (*str != '"' && *str != '\'')
 		return (0);
@@ -25,7 +25,7 @@ static void		add_string(char *ptr, char const*src, size_t i)
 {
 	while (i)
 	{
-		if (isEmptyString(src))
+		if (isemptystring(src))
 		{
 				src++;
 				i--;
@@ -113,7 +113,7 @@ char			**input_split(char const *str, char c)
 	i = 0;
 	while (i < count)
 	{
-		while(isEmptyString(str))
+		while(isemptystring(str))
 			str = str + 2;
 		while (*str == c)
 			str++;
