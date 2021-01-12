@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 17:45:05 by gsmets            #+#    #+#             */
-/*   Updated: 2021/01/12 17:47:06 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/01/12 17:55:46 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,10 @@ int	parser(char *user_input)
 		handle_echo(inputs);
 	else if (!ft_strcmp(inputs[0], "pwd"))
 		handle_pwd();
+	else if (!ft_strcmp(inputs[0], "cd"))
+		handle_cd(inputs);
+	else if (!ft_strcmp(inputs[0], "exit"))
+		exit(EXIT_SUCCESS);
 	else
 		write(1, "try again\n", 10);
 	return (0);
