@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 12:03:49 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/11 19:01:26 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/01/12 13:14:56 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	        parser(char **inputs);
 
 int         handle_echo(char **args);
 int	        handle_pwd(void);
+int			handle_cd(char **args);
 char	    **input_split(char const *str, char c);
 
 #endif
