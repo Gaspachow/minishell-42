@@ -6,129 +6,117 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 17:50:50 by gsmets            #+#    #+#             */
-/*   Updated: 2021/01/12 12:53:46 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/01/12 17:49:09 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
 
-static int		isemptystring(const char *str)
+static char		*find_next_input(char *str)
 {
-	if (*str != '"' && *str != '\'')
-		return (0);
-	else if (*str == *(str + 1))
-		return (1);
-	return (0);
-}
-
-static void		add_string(char *ptr, char const*src, size_t i)
-{
-	while (i)
-	{
-		if (isemptystring(src))
-		{
-				src++;
-				i--;
-		}
-		else
-		{
-			*ptr = *src;
-			ptr++;
-		}
-		src++;
-		i--;
-	}
-	*ptr = '\0';
-}
-
-static size_t	stringcount(char const *str, char c)
-{
-	int i;
-
-	i = 1;
-	while (*str == c && *str)
-		str++;
-	if (!(*str))
-		return (0);
+	char	quote;
+	str--;
 	while (*(++str))
 	{
-		if (*str == '"' && *(str - 1) == c)
+		if (*str == '"' || *str == '\'')
 		{
-			str = ft_strchr(str + 1,'"');
-			i++;
+			quote = *(str++);
+			while (*str != quote)
+				str++;
 		}
-		else if (*str == '\'' && *(str - 1) == c)
+		if (*str == ' ')
+			return (str + 1);
+	}
+	return (str);
+}
+
+static size_t	stringcount(char *str)
+{
+	int		i;
+	char	quote;
+	i = 1;
+	if (!(*str))
+		return (0);
+	str--;
+	while (*(++str))
+	{
+		if (*str == '"' || *str == '\'')
 		{
-			str = ft_strchr(str + 1, '\'');
-			i++;
+			quote = *(str++);
+			while (*str != quote)
+			{
+				str++;
+			}
 		}
-		else if (*str != c && *(str - 1) == c)
+		if (*str == ' ')
 			i++;
 	}
 	return (i);
 }
 
-static char		*newsplit(char const *str, char c)
+int				get_newsplit_len(char *str)
 {
-	size_t	i;
-	char	*ptr;
-
+	int		i;
+	char	quote;
 	i = 0;
-	if (*str == '"')
-		while (str[++i] && str[i] != '"')
-			;
-	else if (*str == '\'')
-		while (str[++i] && str[i] != '\'')
-			;
-	else
+	while (*str != ' ' && *str)
 	{
-		while (str[i] != c && str[i])
+		if (*str == '"' || *str == '\'')
 		{
-			i++;
+			quote = *(str++);
+			while (*(str++) != quote)
+				i++;
 		}
+		else if (str++)
+			i++;
 	}
-	if (*str == '"' || *str == '\'')
-	{
-		str++;
-		i--;
-	}
-	if (!(ptr = malloc((i + 1) * sizeof(char))))
-		return (NULL);
-		ft_putnbr(i);
-	add_string(ptr, str, i);
-	return (ptr);
+	return (i);
 }
 
-char			**input_split(char const *str, char c)
+char 			*newsplit(char *src)
+{
+	int		len;
+	char	*dst;
+	char	quote;
+	len = get_newsplit_len(src);
+	dst = malloc((len + 1) * sizeof(char));
+	if (!dst)
+		return (NULL);
+	while (*src != ' ' && *src)
+	{
+		if (*src == '"' || *src == '\'')
+		{
+			quote = *(src++);
+			while (*src != quote)
+			{
+				*(dst++) = *(src++);
+			}
+			src++;
+		}
+		else
+			*(dst++) = *(src++);
+	}
+	*dst = '\0';
+	return (dst - (len));
+}
+
+char			**input_split(char *str)
 {
 	char	**tab;
 	size_t	count;
 	size_t	i;
 
-	if (str == NULL)
-		return (NULL);
-	count = stringcount(str, c);
-	if (!(tab = malloc((count + 1) * sizeof(char *))))
+	count = stringcount(str);
+	tab = malloc((count + 1) * sizeof(char *));
+	if (!tab)
 		return (NULL);
 	i = 0;
 	while (i < count)
 	{
-		while(isemptystring(str))
-			str = str + 2;
-		while (*str == c)
-			str++;
-		if (!(tab[i++] = newsplit(str, c)))
+		tab[i++] = newsplit(str);
+		if (!tab)
 			return (NULL);
-			ft_putchar('-');
-			ft_putstr(tab[i -1]);
-			ft_putchar('\n');
-		if (*str == '"')
-			str = ft_strchr(str + 1,'"') + 1;
-		else if (*str == '\'')
-			str = ft_strchr(str + 1, '\'') + 1;
-		else
-			while (*str != c && *str && *str != '\'' && *str != '"')
-				str++;
+		str = find_next_input(str);
 	}
 	tab[i] = NULL;
 	return (tab);

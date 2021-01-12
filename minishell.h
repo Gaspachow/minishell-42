@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 12:03:49 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/12 13:59:08 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/01/12 16:38:34 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,6 @@ int	        parser(char *inputs);
 int         handle_echo(char **args);
 int	        handle_pwd(void);
 int			handle_cd(char **args);
-char	    **input_split(char const *str, char c);
+char	    **input_split(char const *str);
 
 #endif
