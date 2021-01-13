@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_split.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 17:50:50 by gsmets            #+#    #+#             */
-/*   Updated: 2021/01/12 17:49:09 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/01/13 12:33:35 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static char		*find_next_input(char *str)
 {
 	char	quote;
+
 	str--;
 	while (*(++str))
 	{
@@ -34,6 +35,7 @@ static size_t	stringcount(char *str)
 {
 	int		i;
 	char	quote;
+
 	i = 1;
 	if (!(*str))
 		return (0);
@@ -58,6 +60,7 @@ int				get_newsplit_len(char *str)
 {
 	int		i;
 	char	quote;
+
 	i = 0;
 	while (*str != ' ' && *str)
 	{
@@ -73,11 +76,12 @@ int				get_newsplit_len(char *str)
 	return (i);
 }
 
-char 			*newsplit(char *src)
+char			*newsplit(char *src)
 {
 	int		len;
 	char	*dst;
 	char	quote;
+
 	len = get_newsplit_len(src);
 	dst = malloc((len + 1) * sizeof(char));
 	if (!dst)

@@ -6,15 +6,15 @@
 /*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 17:45:05 by gsmets            #+#    #+#             */
-/*   Updated: 2021/01/13 11:21:27 by tpons            ###   ########.fr       */
+/*   Updated: 2021/01/13 12:32:00 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static void	input_copy(char *dst, char *src)
+static void		input_copy(char *dst, char *src)
 {
-	char quote;
+	char	quote;
 
 	while (*src)
 	{
@@ -34,10 +34,10 @@ static void	input_copy(char *dst, char *src)
 	*dst = '\0';
 }
 
-static int	input_len(char *str)
+static int		input_len(char *str)
 {
-	int i;
-	char quote;
+	int		i;
+	char	quote;
 
 	i = 0;
 	while (*str)
@@ -63,28 +63,28 @@ static int	input_len(char *str)
 	return (i);
 }
 
-static char	*input_cleaner(char *str)
+static char		*input_cleaner(char *str)
 {
-	int len;
-	char *clean_input;
-	
+	int		len;
+	char	*clean_input;
+
 	while (*str == ' ' && *str)
 		str++;
 	len = input_len(str);
 	if (len == -1)
 		return (0);
-	clean_input = (char *)malloc((len + 1) * sizeof(char));						//malloc
+	clean_input = (char *)malloc((len + 1) * sizeof(char));//malloc
 	if (!clean_input)
-		return (0); // Need error function (malloc failed)
+		return (0);//Need error function (malloc failed)
 	input_copy(clean_input, str);
 	return (clean_input);
 }
 
-int	parser(char *user_input, char **env)
+int				parser(char *user_input, char **env)
 {
 	char *clean_input;
 	char **inputs;
-	
+
 	clean_input = input_cleaner(user_input);
 	if (clean_input == 0)
 	{
