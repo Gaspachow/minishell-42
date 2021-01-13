@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 17:45:05 by gsmets            #+#    #+#             */
-/*   Updated: 2021/01/12 17:55:46 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/01/13 11:21:27 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ static char	*input_cleaner(char *str)
 	return (clean_input);
 }
 
-int	parser(char *user_input)
+int	parser(char *user_input, char **env)
 {
 	char *clean_input;
 	char **inputs;
@@ -103,6 +103,6 @@ int	parser(char *user_input)
 	else if (!ft_strcmp(inputs[0], "exit"))
 		exit(EXIT_SUCCESS);
 	else
-		write(1, "try again\n", 10);
+		handle_exec(inputs, env);
 	return (0);
 }
