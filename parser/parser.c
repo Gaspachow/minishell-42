@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 17:45:05 by gsmets            #+#    #+#             */
-/*   Updated: 2021/01/13 12:32:00 by tpons            ###   ########.fr       */
+/*   Updated: 2021/01/13 20:03:36 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,12 +80,12 @@ static char		*input_cleaner(char *str)
 	return (clean_input);
 }
 
-int				parser(char *user_input, char **env)
+int				parser_start(char *user_input, char **env)
 {
 	char *clean_input;
-	char **inputs;
 
 	clean_input = input_cleaner(user_input);
+	free(user_input);
 	if (clean_input == 0)
 	{
 		ft_putstr("This minishell does not support multiline commands\n");
@@ -93,16 +93,5 @@ int				parser(char *user_input, char **env)
 	}
 	if (!*clean_input)
 		return (0);
-	inputs = input_split(clean_input);
-	if (!ft_strcmp(inputs[0], "echo"))
-		handle_echo(inputs);
-	else if (!ft_strcmp(inputs[0], "pwd"))
-		handle_pwd();
-	else if (!ft_strcmp(inputs[0], "cd"))
-		handle_cd(inputs);
-	else if (!ft_strcmp(inputs[0], "exit"))
-		exit(EXIT_SUCCESS);
-	else
-		handle_exec(inputs, env);
-	return (0);
+	return(parser_delegator(clean_input, env, 0));
 }

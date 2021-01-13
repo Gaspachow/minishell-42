@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 12:03:49 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/13 15:41:57 by tpons            ###   ########.fr       */
+/*   Updated: 2021/01/13 20:02:54 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,14 @@ typedef	struct	s_data
 }				t_data;
 */
 
-int				parser(char *inputs, char **env);
+int				parser_start(char *inputs, char **env);
 char			**input_split(char const *str);
 
 int				handle_echo(char **args);
 int				handle_pwd(void);
 int				handle_cd(char **args);
 int				handle_exec(char **args, char **env);
+int				handle_pipe(char *input1, char *input2, char **env);
+int				parser_delegator(char *input, char **env, int piped);
 
 #endif

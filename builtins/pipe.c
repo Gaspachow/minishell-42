@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 15:50:16 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/13 18:51:08 by tpons            ###   ########.fr       */
+/*   Updated: 2021/01/13 19:59:15 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 **	coucou
 */
 
-int		handle_pipe(char **inputs, char *input2, char **env)
+int		handle_pipe(char *input1, char *input2, char **env)
 {
 	int		oldfd;
 	pid_t	pid;
@@ -30,7 +30,7 @@ int		handle_pipe(char **inputs, char *input2, char **env)
 	{
 		oldfd = dup(1);
 		dup2(fds[1], 1);
-		// call of the function "parser_delegator"
+		parser_delegator(input1, env, 1);
 	}
 	else if (pid < 0)
 		exit(EXIT_FAILURE);//return (0);
@@ -40,7 +40,7 @@ int		handle_pipe(char **inputs, char *input2, char **env)
 			exit(EXIT_FAILURE);//return (0);
 		oldfd = dup(0);
 		dup2(fds[0], 0);
-		// function that convert input2 into the new inputs
+		parser_start(input2, env);
 	}
 	return (1);
 }
