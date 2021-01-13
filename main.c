@@ -6,7 +6,7 @@
 /*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 12:04:28 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/12 15:46:36 by tpons            ###   ########.fr       */
+/*   Updated: 2021/01/13 11:20:24 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	main(int ac, char **av, char **env)
 		i = 0;
 		ft_putstr("minishell> ");
 		get_next_line(0, &user_input);
-		parser(user_input);
+		parser(user_input, env);
 
 	}
 	return (0);
