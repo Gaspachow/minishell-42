@@ -1,30 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/11 12:04:28 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/13 13:49:20 by tpons            ###   ########.fr       */
+/*   Created: 2021/01/13 13:21:58 by tpons             #+#    #+#             */
+/*   Updated: 2021/01/13 14:02:13 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../minishell.h"
 
-#include "minishell.h"
-
-int	main(int ac, char **av, char **env)
+t_data	init_data(char **env)
 {
-	t_data	data;
+	t_data	temp;
 
-	ac = 0;
-	av = NULL;
-	data = init_data(env);
-	while (1)
-	{
-		ft_putstr("minishell> ");
-		get_next_line(0, &data.user_input);
-		parser(data);
-	}
-	return (0);
+	temp.user_input = NULL;
+	// temp.clean_input = NULL;
+	// temp.inputs = NULL;
+	temp.env = env;
+	return (temp);
 }

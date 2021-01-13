@@ -6,7 +6,7 @@
 /*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 12:03:49 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/13 12:09:55 by tpons            ###   ########.fr       */
+/*   Updated: 2021/01/13 14:01:45 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,21 @@
 # include <dirent.h>
 # include "libft/libft.h"
 
-int		parser(char *inputs, char **env);
+typedef	struct	s_data
+{
+	char		*user_input;
+	char		*clean_input;
+	char		**inputs;
+	char		**env;
+}				t_data;
 
-int		handle_echo(char **args);
-int		handle_pwd(void);
-int		handle_cd(char **args);
-int		handle_exec(char **args, char **env);
-char	**input_split(char const *str);
+t_data			init_data(char **env);
+int				parser(char *inputs, char **env);
+char			**input_split(char const *str);
+
+int				handle_echo(char **args);
+int				handle_pwd(void);
+int				handle_cd(char **args);
+int				handle_exec(char **args, char **env);
 
 #endif
