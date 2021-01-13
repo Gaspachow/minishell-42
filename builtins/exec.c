@@ -6,7 +6,7 @@
 /*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 17:01:07 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/13 12:18:37 by tpons            ###   ########.fr       */
+/*   Updated: 2021/01/13 16:00:41 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	handle_exec(char **args, char **env)
 		if (!execve(args[0], &args[0], env))
 			exit(EXIT_FAILURE);
 	}
-	else if (pid == -1)
+	else if (pid < 0)
 		exit(EXIT_FAILURE);
 		//status = -1; //ERROR
 	else
