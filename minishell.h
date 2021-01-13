@@ -6,7 +6,7 @@
 /*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 12:03:49 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/13 14:01:45 by tpons            ###   ########.fr       */
+/*   Updated: 2021/01/13 15:41:57 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # include <dirent.h>
 # include "libft/libft.h"
 
+/*
 typedef	struct	s_data
 {
 	char		*user_input;
@@ -35,8 +36,8 @@ typedef	struct	s_data
 	char		**inputs;
 	char		**env;
 }				t_data;
+*/
 
-t_data			init_data(char **env);
 int				parser(char *inputs, char **env);
 char			**input_split(char const *str);
 
