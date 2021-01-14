@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 17:01:07 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/13 19:48:00 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/01/14 19:02:43 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	handle_exec(char **args, char **env)
+int	handle_exec(char **args, t_data *data)
 {
 	pid_t	pid;
 	int		status;
@@ -21,7 +21,7 @@ int	handle_exec(char **args, char **env)
 	pid = fork();
 	if (pid == 0)
 	{
-		if (!execve(args[0], &args[0], env))
+		if (!execve(args[0], &args[0], data->env))
 			exit(EXIT_FAILURE);
 	}
 	else if (pid < 0)

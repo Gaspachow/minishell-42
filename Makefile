@@ -3,7 +3,7 @@ SRCS	= main.c
 
 SRCS	+= parser/parser.c parser/input_split.c parser/parser_delegator.c
 
-SRCS	+= builtins/echo.c builtins/pwd.c builtins/cd.c builtins/exec.c
+SRCS	+= builtins/echo.c builtins/pwd.c builtins/cd.c builtins/exec.c builtins/env.c
 
 SRCS	+= builtins/pipe.c
 
