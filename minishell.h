@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 12:03:49 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/14 16:33:39 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/01/14 16:48:15 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef	struct	s_data
 }				t_data;
 */
 
-int				parser_start(char *inputs, char **env, int *fds);
+int				parser_start(char *inputs, char **env);
 char			**input_split(char const *str);
 
 int				handle_echo(char **args);
@@ -46,6 +46,6 @@ int				handle_pwd(void);
 int				handle_cd(char **args);
 int				handle_exec(char **args, char **env);
 int				handle_pipe(char *input1, char *input2, char **env);
-int				parser_delegator(char *input, char **env, int piped, int *fds);
+int				parser_delegator(char *input, char **env, int piped);
 
 #endif
