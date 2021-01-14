@@ -6,13 +6,13 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 15:47:26 by gsmets            #+#    #+#             */
-/*   Updated: 2021/01/13 20:02:42 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/01/14 16:24:47 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int static	handle_basic(char *clean_input, char **env, int piped)
+int static	handle_basic(char *clean_input, char **env, int piped, int *fds)
 {
 	char **inputs;
 	
@@ -28,7 +28,10 @@ int static	handle_basic(char *clean_input, char **env, int piped)
 	else
 		handle_exec(inputs, env);
 	if (piped)
+	{
+		close(fds[1]);
 		exit (0);
+	}
 	return (0);
 }
 
@@ -44,7 +47,7 @@ static int	parser_pipe(char *input, int pipe_pos, char **env) {
 	return (handle_pipe(input, new_input, env)); 
 }
 
-int			parser_delegator(char *input, char **env, int piped)
+int			parser_delegator(char *input, char **env, int piped, int *fds)
 {
 	int		i;
 	char	quote;
@@ -63,5 +66,5 @@ int			parser_delegator(char *input, char **env, int piped)
 			return (parser_pipe(input, i, env));
 		i++;
 	}
-	return (handle_basic(input, env, piped));
+	return (handle_basic(input, env, piped, fds));
 }
