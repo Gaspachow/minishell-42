@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 15:47:26 by gsmets            #+#    #+#             */
-/*   Updated: 2021/01/14 16:24:47 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/01/14 16:34:22 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ int static	handle_basic(char *clean_input, char **env, int piped, int *fds)
 		handle_exec(inputs, env);
 	if (piped)
 	{
-		close(fds[1]);
+		if (fds)
+			close(fds[1]);
 		exit (0);
 	}
 	return (0);

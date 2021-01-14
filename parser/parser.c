@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 17:45:05 by gsmets            #+#    #+#             */
-/*   Updated: 2021/01/13 20:03:36 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/01/14 16:34:58 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ static char		*input_cleaner(char *str)
 	return (clean_input);
 }
 
-int				parser_start(char *user_input, char **env)
+int				parser_start(char *user_input, char **env, int *fds)
 {
 	char *clean_input;
 
@@ -93,5 +93,5 @@ int				parser_start(char *user_input, char **env)
 	}
 	if (!*clean_input)
 		return (0);
-	return(parser_delegator(clean_input, env, 0));
+	return(parser_delegator(clean_input, env, 0, fds));
 }

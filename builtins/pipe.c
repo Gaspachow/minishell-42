@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 15:50:16 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/14 15:45:58 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/01/14 16:35:21 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int		handle_pipe(char *input1, char *input2, char **env)
 			exit(EXIT_FAILURE);//return (0);
 		oldfd = dup(0);
 		dup2(fds[0], 0);
-		parser_start(input2, env);
+		parser_start(input2, env, 0);
 		close(fds[0]);
 		dup2(oldfd, 0);
 	}
