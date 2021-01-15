@@ -6,7 +6,7 @@
 /*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 12:03:49 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/14 19:09:31 by tpons            ###   ########.fr       */
+/*   Updated: 2021/01/15 16:51:46 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef	struct	s_data
 }				t_data;
 
 int				envlen(char **env);
+void			free_env(char **env);
 void			dup_env(t_data *data, char **env);
 
 int				parser_start(char *inputs, t_data *data);
@@ -44,6 +45,7 @@ int				handle_pwd(void);
 int				handle_cd(char **args);
 int				handle_exec(char **args, t_data *data);
 int				handle_env(t_data *data);
+int				handle_export(char **inputs, t_data *data);
 int				handle_pipe(char *input1, char *input2, t_data *data);
 int				parser_delegator(char *input, t_data *data, int piped);
 

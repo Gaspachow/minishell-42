@@ -6,12 +6,24 @@
 /*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 15:03:40 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/14 19:05:59 by tpons            ###   ########.fr       */
+/*   Updated: 2021/01/15 16:50:50 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
+
+void	free_env(char **env)
+{
+	int	i;
+	int	env_len;
+
+	i = 0;
+	env_len = envlen(env);
+	while (i < env_len)
+		free(env[i++]);
+	free(env);
+}
 
 int		envlen(char **env)
 {
@@ -69,10 +81,19 @@ int		handle_env(t_data *data)
 // 	return (new_env);
 // }
 /*
-**int		check_var(char *str)
+**int		check_var(char **str)
 **{
-**	if (str[0] == '=')
-**		return (0);
-**	return (ft_strchr(str, '='));
+**	int	i;
+**
+**	i = 0;
+**	while (str[i])
+**	{
+**		if (str[0][0] == '=')
+**			return (0);
+**		if (!ft_strchr(str[i], '='))
+**			return (0);
+**		i++;
+**	}
+**	return (1);
 **}
 */
