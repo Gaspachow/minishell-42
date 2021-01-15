@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_delegator.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 15:47:26 by gsmets            #+#    #+#             */
-/*   Updated: 2021/01/14 18:47:00 by tpons            ###   ########.fr       */
+/*   Updated: 2021/01/15 18:20:27 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,16 @@ int			parser_delegator(char *input, t_data *data, int piped)
 			quote = input[i];
 			i++;
 			while (input[i] != quote)
+			{
+				if (input[i] == '$')
+					parser_variable(&input, &i, data);
 				i++;
+			}
 		}
 		else if (input[i] == '|')
 			return (parser_pipe(input, i, data));
+		else if (input[i] == '$')
+			parser_variable(&input, &i, data);
 		i++;
 	}
 	return (handle_basic(input, data, piped));
