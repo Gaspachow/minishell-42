@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 15:47:26 by gsmets            #+#    #+#             */
-/*   Updated: 2021/01/15 18:20:27 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/01/15 18:28:51 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int static	handle_basic(char *clean_input, t_data *data, int piped)
 		handle_env(data);
 	else if (!ft_strcmp(inputs[0], "exit"))
 		exit(EXIT_SUCCESS);
+	else if (!ft_strcmp(inputs[0], "export"))
+		handle_export(inputs, data);
 	else
 		handle_exec(inputs, data);
 	if (piped)
