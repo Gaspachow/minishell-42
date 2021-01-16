@@ -6,7 +6,7 @@
 /*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 15:03:40 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/15 16:50:50 by tpons            ###   ########.fr       */
+/*   Updated: 2021/01/16 12:32:23 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,20 +35,22 @@ int		envlen(char **env)
 	return (++i); //add one for \0 case
 }
 
-void	dup_env(t_data *data, char **env)
+char	**dup_env(char **env)
 {
-	int	i;
+	char	**data_env;
+	int		i;
 
 	i = 0;
-	data->env = malloc(sizeof(char *) * envlen(env));
-	if (!data->env)
+	data_env = malloc(sizeof(char *) * envlen(env));
+	if (!data_env)
 		exit(EXIT_FAILURE);
 	while (env[i])
 	{
-		data->env[i]= ft_strdup(env[i]);
+		data_env[i]= ft_strdup(env[i]);
 		i++;
 	}
-	data->env[i] = 0;
+	data_env[i] = 0;
+	return (data_env);
 }
 
 int		handle_env(t_data *data)

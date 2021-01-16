@@ -6,7 +6,7 @@
 /*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 12:03:49 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/16 12:16:05 by tpons            ###   ########.fr       */
+/*   Updated: 2021/01/16 12:33:15 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef	struct	s_data
 
 int				envlen(char **env);
 void			free_env(char **env);
-void			dup_env(t_data *data, char **env);
+char			**dup_env(char **env);
 
 int				parser_start(char *inputs, t_data *data);
 char			**input_split(char const *str);

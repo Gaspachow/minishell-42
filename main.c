@@ -6,7 +6,7 @@
 /*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 12:04:28 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/16 12:16:26 by tpons            ###   ########.fr       */
+/*   Updated: 2021/01/16 12:32:54 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main(int ac, char **av, char **env)
 	ac = 0;
 	av = NULL;
 	data.status = 0;
-	dup_env(&data, env);
+	data.env = dup_env(env);
 	if (!data.env)
 		exit(EXIT_FAILURE);
 	while (1)
