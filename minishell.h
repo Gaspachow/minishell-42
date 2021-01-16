@@ -6,7 +6,7 @@
 /*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 12:03:49 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/16 13:30:38 by tpons            ###   ########.fr       */
+/*   Updated: 2021/01/16 16:43:27 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,15 @@ char			**input_split(char const *str);
 
 int				handle_echo(char **args);
 int				handle_pwd(void);
-int				handle_cd(char **args);
+int				handle_cd(char **args, t_data *data);
 int				handle_exec(char **args, t_data *data);
 int				handle_env(char **env);
+
+void			replace_var(char *new_var, t_data *data, int index);
+int				var_exists(char *name, t_data *data);
 int				print_export(char **env);
 int				handle_export(char **args, t_data *data);
+
 int				handle_pipe(char *input1, char *input2, t_data *data);
 int				parser_delegator(char *input, t_data *data, int piped);
 void			parser_variable(char **input_address, int *i, t_data *data);
