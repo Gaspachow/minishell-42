@@ -6,7 +6,7 @@
 /*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 15:35:31 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/15 17:35:47 by tpons            ###   ########.fr       */
+/*   Updated: 2021/01/16 13:30:54 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,32 @@ char	**export_env(char **old_env, char *export)
 	return (new_env);
 }
 
+void	export_alone(t_data *data)
+{
+	int		i;
+	int		j;
+	char	**temp_env;
+	char	*swap;
+
+	i = 0;
+	temp_env = dup_env(data->env);
+	while (temp_env[i + 1])
+	{
+		j = i + 1;
+		if (strcmp(temp_env[i], temp_env[j]) > 0)
+		{
+			swap = temp_env[j];
+			temp_env[j] = temp_env[i];
+			temp_env[i] = swap;
+			i = 0;
+		}
+		else
+			i++;
+	}
+	print_export(temp_env);
+	free_env(temp_env);
+}
+
 int		handle_export(char **inputs, t_data *data)
 {
 	int	i;
@@ -81,6 +107,6 @@ int		handle_export(char **inputs, t_data *data)
 		}
 	}
 	else
-		ft_putstr("export seul");
+		export_alone(data);
 	return (1);
 }

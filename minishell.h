@@ -6,7 +6,7 @@
 /*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 12:03:49 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/16 12:53:50 by tpons            ###   ########.fr       */
+/*   Updated: 2021/01/16 13:30:38 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int				handle_pwd(void);
 int				handle_cd(char **args);
 int				handle_exec(char **args, t_data *data);
 int				handle_env(char **env);
+int				print_export(char **env);
 int				handle_export(char **args, t_data *data);
 int				handle_pipe(char *input1, char *input2, t_data *data);
 int				parser_delegator(char *input, t_data *data, int piped);
