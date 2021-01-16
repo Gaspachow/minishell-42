@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_delegator.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 15:47:26 by gsmets            #+#    #+#             */
-/*   Updated: 2021/01/15 18:28:51 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/01/16 12:53:27 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int static	handle_basic(char *clean_input, t_data *data, int piped)
 	else if (!ft_strcmp(inputs[0], "cd"))
 		handle_cd(inputs);
 	else if (!ft_strcmp(inputs[0], "env"))
-		handle_env(data);
+		handle_env(data->env);
 	else if (!ft_strcmp(inputs[0], "exit"))
 		exit(EXIT_SUCCESS);
 	else if (!ft_strcmp(inputs[0], "export"))
