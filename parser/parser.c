@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 17:45:05 by gsmets            #+#    #+#             */
-/*   Updated: 2021/01/16 12:43:17 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/01/16 14:08:23 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ static char		*input_cleaner(char *str)
 
 int				parser_start(char *user_input, t_data *data)
 {
-	char *clean_input;
+	char	*clean_input;
 
 	clean_input = input_cleaner(user_input);
 	free(user_input);
