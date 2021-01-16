@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 15:47:26 by gsmets            #+#    #+#             */
-/*   Updated: 2021/01/16 14:10:22 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/01/16 16:40:31 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int static	handle_basic(char *clean_input, t_data *data, int piped)
 	char **inputs;
 	
 	inputs = input_split(clean_input);
+	free(clean_input);
 	if (!ft_strcmp(inputs[0], "echo"))
 		handle_echo(inputs);
 	else if (!ft_strcmp(inputs[0], "pwd"))
