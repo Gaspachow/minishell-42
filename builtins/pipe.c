@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 15:50:16 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/14 18:44:07 by tpons            ###   ########.fr       */
+/*   Updated: 2021/01/16 17:06:37 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int		handle_pipe(char *input1, char *input2, t_data *data)
 		dup2(fds[1], 1);
 		close(fds[0]);
 		close(fds[1]);
-		parser_delegator(input1, data, 1);
+		handle_basic(input1, data, 1);
 	}
 	else if (pid < 0)
 		exit(EXIT_FAILURE);//return (0);

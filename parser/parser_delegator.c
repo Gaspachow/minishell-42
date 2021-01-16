@@ -6,13 +6,13 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 15:47:26 by gsmets            #+#    #+#             */
-/*   Updated: 2021/01/16 16:40:31 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/01/16 17:07:49 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int static	handle_basic(char *clean_input, t_data *data, int piped)
+int	handle_basic(char *clean_input, t_data *data, int piped)
 {
 	char **inputs;
 	
@@ -23,7 +23,7 @@ int static	handle_basic(char *clean_input, t_data *data, int piped)
 	else if (!ft_strcmp(inputs[0], "pwd"))
 		handle_pwd();
 	else if (!ft_strcmp(inputs[0], "cd"))
-		handle_cd(inputs);
+		handle_cd(inputs, data);
 	else if (!ft_strcmp(inputs[0], "env"))
 		handle_env(data->env);
 	else if (!ft_strcmp(inputs[0], "exit"))
@@ -58,7 +58,7 @@ static int	parser_semi(char *input, int semi_pos, t_data *data) {
 		space = 1;
 	new_input = ft_strdup(&input[semi_pos + 1]);
 	input[semi_pos - space] = '\0';
-	parser_start(input, data);
+	handle_basic(input, data, 0);
 	return (parser_start(new_input, data));
 }
 
