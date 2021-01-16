@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_delegator.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 15:47:26 by gsmets            #+#    #+#             */
-/*   Updated: 2021/01/16 12:53:27 by tpons            ###   ########.fr       */
+/*   Updated: 2021/01/16 14:10:22 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,19 @@ static int	parser_pipe(char *input, int pipe_pos, t_data *data) {
 	return (handle_pipe(input, new_input, data)); 
 }
 
+static int	parser_semi(char *input, int semi_pos, t_data *data) {
+	char	*new_input;
+	int		space;
+
+	space = 0;
+	if (input[semi_pos - 1] == ' ')
+		space = 1;
+	new_input = ft_strdup(&input[semi_pos + 1]);
+	input[semi_pos - space] = '\0';
+	parser_start(input, data);
+	return (parser_start(new_input, data));
+}
+
 int			parser_delegator(char *input, t_data *data, int piped)
 {
 	int		i;
@@ -69,6 +82,8 @@ int			parser_delegator(char *input, t_data *data, int piped)
 		}
 		else if (input[i] == '|')
 			return (parser_pipe(input, i, data));
+		else if (input[i] == ';')
+			return (parser_semi(input, i, data));
 		else if (input[i] == '$')
 			parser_variable(&input, &i, data);
 		i++;
