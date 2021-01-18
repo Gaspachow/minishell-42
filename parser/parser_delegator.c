@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_delegator.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 15:47:26 by gsmets            #+#    #+#             */
-/*   Updated: 2021/01/18 14:46:47 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/01/18 17:49:35 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,11 @@
 int	handle_basic(char *clean_input, t_data *data, int piped)
 {
 	char **inputs;
-	int		oldfd;
+	int		oldfd1;
+	int		oldfd2;
 	
-	oldfd = dup(1);
+	oldfd1 = dup(1);
+	oldfd2 = dup(0);
 	parser_redir(&clean_input);
 	clean_input = input_cleaner(clean_input);
 	inputs = input_split(clean_input);
@@ -40,7 +42,8 @@ int	handle_basic(char *clean_input, t_data *data, int piped)
 		handle_exec(inputs, data);
 	if (piped)
 		exit (0);
-	dup2(oldfd, 1);
+	dup2(oldfd1, 1);
+	dup2(oldfd2, 0);
 	return (0);
 }
 
