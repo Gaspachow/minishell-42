@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 12:35:13 by gsmets            #+#    #+#             */
-/*   Updated: 2021/01/18 14:43:01 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/01/18 18:04:52 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,29 @@ void		handle_redir(char **input_address, int i)
 		fd = open(filename, O_RDWR | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
 		free(filename);
 		dup2(fd, 1);
+		parser_redir(input_address);
+	}
+	if (str[i] == '>' && str[i + 1] == '>')
+	{
+		j++;
+		if (str[j + 1] == ' ')
+			j++;
+		filename = get_filename(&(str[j + 1]), &j);
+		remove_redir_input(input_address, i, j);
+		fd = open(filename, O_RDWR | O_CREAT | O_APPEND);
+		free(filename);
+		dup2(fd, 1);
+		parser_redir(input_address);
+	}
+	if (str[i] == '<' && str[i + 1] != '<')
+	{
+		if (str[j + 1] == ' ')
+			j++;
+		filename = get_filename(&(str[j + 1]), &j);
+		remove_redir_input(input_address, i, j);
+		fd = open(filename, O_RDONLY);
+		free(filename);
+		dup2(fd, 0);
 		parser_redir(input_address);
 	}
 }
