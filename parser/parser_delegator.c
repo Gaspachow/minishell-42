@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   parser_delegator.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 15:47:26 by gsmets            #+#    #+#             */
 /*   Updated: 2021/01/18 14:46:47 by gsmets           ###   ########.fr       */
@@ -34,6 +34,8 @@ int	handle_basic(char *clean_input, t_data *data, int piped)
 		exit(EXIT_SUCCESS);
 	else if (!ft_strcmp(inputs[0], "export"))
 		handle_export(inputs, data);
+	else if (!ft_strcmp(inputs[0], "unset"))
+		handle_unset(inputs, data);
 	else
 		handle_exec(inputs, data);
 	if (piped)

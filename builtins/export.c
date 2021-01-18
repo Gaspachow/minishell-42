@@ -6,13 +6,13 @@
 /*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 15:35:31 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/16 13:30:54 by tpons            ###   ########.fr       */
+/*   Updated: 2021/01/18 11:21:01 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int		var_exists(char *name, t_data *data)
+int		var_index(char *name, t_data *data)
 {
 	int		y;
 	int		x;
@@ -94,7 +94,7 @@ int		handle_export(char **inputs, t_data *data)
 	{
 		while (inputs[i])
 		{
-			index = var_exists(inputs[i], data);
+			index = var_index(inputs[i], data);
 			if (index > 0)
 				replace_var(inputs[i], data, index);
 			else
