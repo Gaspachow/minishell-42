@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 17:45:05 by gsmets            #+#    #+#             */
-/*   Updated: 2021/01/18 14:49:20 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/01/18 15:31:48 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ char		*input_cleaner(char *str)
 	if (!clean_input)
 		return (0);//Need error function (malloc failed)
 	input_copy(clean_input, str);
-	free(str);
 	return (clean_input);
 }
 
