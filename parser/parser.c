@@ -6,13 +6,13 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 17:45:05 by gsmets            #+#    #+#             */
-/*   Updated: 2021/01/16 14:08:23 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/01/18 14:49:20 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static void		input_copy(char *dst, char *src)
+void		input_copy(char *dst, char *src)
 {
 	char	quote;
 
@@ -62,8 +62,7 @@ static int		input_len(char *str)
 	}
 	return (i);
 }
-
-static char		*input_cleaner(char *str)
+char		*input_cleaner(char *str)
 {
 	int		len;
 	char	*clean_input;
@@ -77,6 +76,7 @@ static char		*input_cleaner(char *str)
 	if (!clean_input)
 		return (0);//Need error function (malloc failed)
 	input_copy(clean_input, str);
+	free(str);
 	return (clean_input);
 }
 
@@ -85,7 +85,6 @@ int				parser_start(char *user_input, t_data *data)
 	char	*clean_input;
 
 	clean_input = input_cleaner(user_input);
-	free(user_input);
 	if (clean_input == 0)
 	{
 		ft_putstr("This minishell does not support multiline commands\n");

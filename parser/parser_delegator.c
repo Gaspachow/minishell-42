@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 15:47:26 by gsmets            #+#    #+#             */
-/*   Updated: 2021/01/16 17:07:49 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/01/18 14:46:47 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,11 @@
 int	handle_basic(char *clean_input, t_data *data, int piped)
 {
 	char **inputs;
+	int		oldfd;
 	
+	oldfd = dup(1);
+	parser_redir(&clean_input);
+	clean_input = input_cleaner(clean_input);
 	inputs = input_split(clean_input);
 	free(clean_input);
 	if (!ft_strcmp(inputs[0], "echo"))
@@ -34,6 +38,7 @@ int	handle_basic(char *clean_input, t_data *data, int piped)
 		handle_exec(inputs, data);
 	if (piped)
 		exit (0);
+	dup2(oldfd, 1);
 	return (0);
 }
 

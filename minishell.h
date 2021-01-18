@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 12:03:49 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/16 17:07:34 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/01/18 14:46:02 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,8 @@ int				handle_export(char **args, t_data *data);
 int				handle_pipe(char *input1, char *input2, t_data *data);
 int				parser_delegator(char *input, t_data *data, int piped);
 void			parser_variable(char **input_address, int *i, t_data *data);
+int				parser_redir(char **input_address);
+void			input_copy(char *dst, char *src);
+char			*input_cleaner(char *str);
 
 #endif
