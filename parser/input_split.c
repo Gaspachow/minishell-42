@@ -6,11 +6,12 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 17:50:50 by gsmets            #+#    #+#             */
-/*   Updated: 2021/01/19 14:35:40 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/01/19 16:29:59 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
+
+#include "../minishell.h"
 
 static char		*find_next_input(char *str)
 {
@@ -81,60 +82,34 @@ char			*newsplit(char *src)
 	int		len;
 	char	*dst;
 	char	quote;
-	char	*ret;
 
+	quote = 0;
 	len = get_newsplit_len(src);
 	dst = malloc((len + 1) * sizeof(char));
-	ret = dst;
 	if (!dst)
 		return (NULL);
-	while (*src != ' ' && *src)
-	{
-		if (*src == '\'')
-		{
-			quote = *(src++);
-			while (*src != quote)
-			{
-				*(dst++) = *(src++);
-			}
-			src++;
-		}
-		if (*src == '"')
-		{
-			quote = *(src++);
-			while (*src != quote)
-			{
-				if (*src == '\\' && (*(src + 1) == quote || *(src + 1) == '\\' || *(src + 1) == '$'))
-					src++;
-				*(dst++) = *(src++);
-			}
-			src++;
-		}
-		else
-			*(dst++) = *(src++);
-	}
-	*dst = '\0';
-	return (ret);
+	copy_newsplit(src, dst, quote);
+	return (dst);
 }
 
 char			**input_split(char *str)
 {
-	char	**tab;
+	char	**inputs;
 	size_t	count;
 	size_t	i;
 
 	count = stringcount(str);
-	tab = malloc((count + 1) * sizeof(char *));
-	if (!tab)
+	inputs = malloc((count + 1) * sizeof(char *));
+	if (!inputs)
 		return (NULL);
 	i = 0;
 	while (i < count)
 	{
-		tab[i++] = newsplit(str);
-		if (!tab)
+		inputs[i++] = newsplit(str);
+		if (!inputs)
 			return (NULL);
 		str = find_next_input(str);
 	}
-	tab[i] = NULL;
-	return (tab);
+	inputs[i] = NULL;
+	return (inputs);
 }

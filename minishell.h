@@ -3,13 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 12:03:49 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/18 14:46:02 by gsmets           ###   ########.fr       */
-/*   Updated: 2021/01/18 12:12:09 by tpons            ###   ########.fr       */
+/*   Updated: 2021/01/19 16:24:03 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -40,7 +40,7 @@ void			free_env(char **env);
 char			**dup_env(char **env);
 
 int				parser_start(char *inputs, t_data *data);
-char			**input_split(char const *str);
+char			**input_split(char *str);
 
 int				handle_basic(char *clean_input, t_data *data, int piped);
 int				handle_echo(char **args);
@@ -61,5 +61,6 @@ void			parser_variable(char **input_address, int *i, t_data *data);
 int				parser_redir(char **input_address);
 void			input_copy(char *dst, char *src);
 char			*input_cleaner(char *str);
+void			copy_newsplit(char *src, char *dst, char quote);
 
 #endif
