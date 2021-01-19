@@ -6,7 +6,7 @@
 /*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 11:12:35 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/18 12:47:44 by tpons            ###   ########.fr       */
+/*   Updated: 2021/01/19 15:40:22 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	handle_unset(char **inputs, t_data *data)
 	int	index;
 
 	i = 1;
-	while(inputs[i])
+	while (inputs[i])
 	{
 		index = varname_index(inputs[i], data);
 		if (index > 0)

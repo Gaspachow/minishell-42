@@ -6,7 +6,7 @@
 /*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 15:03:40 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/16 13:33:16 by tpons            ###   ########.fr       */
+/*   Updated: 2021/01/19 15:40:35 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int		envlen(char **env)
 	i = 0;
 	while (env[i])
 		i++;
-	return (++i); //add one for \0 case
+	return (++i);
 }
 
 char	**dup_env(char **env)

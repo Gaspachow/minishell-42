@@ -6,7 +6,7 @@
 /*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 17:01:07 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/18 18:43:57 by tpons            ###   ########.fr       */
+/*   Updated: 2021/01/19 15:40:03 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,6 @@
 **	try executing strjoin(paths[i], inputs[0]) for every path existing
 **	if nothing happend return (error)
 */
-
-// char	*clean_path(char *str)
-// {
-// 	char	*new_str;
-// 	int		i;
-// 	int		j;
-
-// 	i = 5;
-// 	j = 0;
-// 	return (new_str);
-// }
 
 char	**gen_paths(int index, t_data *data, char *input)
 {
@@ -48,8 +37,6 @@ char	**gen_paths(int index, t_data *data, char *input)
 		temp = paths[i];
 		paths[i] = ft_strjoin(paths[i], input);
 		free(temp);
-		// ft_putstr(paths[i]);
-		// ft_putchar('\n');
 		i++;
 	}
 	return (paths);
@@ -57,11 +44,10 @@ char	**gen_paths(int index, t_data *data, char *input)
 
 int		execute(char **inputs, t_data *data)
 {
-
-	int				i;
-	int				index;
-	char			**paths;
-	struct	stat	statounet;
+	int			i;
+	int			index;
+	char		**paths;
+	struct stat	statounet;
 
 	i = 1;
 	index = var_index("PATH=", data);
@@ -104,7 +90,6 @@ int		handle_exec(char **inputs, t_data *data)
 	}
 	else if (pid < 0)
 		exit(EXIT_FAILURE);
-		//status = -1; //ERROR
 	else
 	{
 		if (waitpid(pid, &status, 0) != pid)
