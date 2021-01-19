@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 17:50:50 by gsmets            #+#    #+#             */
-/*   Updated: 2021/01/19 16:29:59 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/01/19 20:11:33 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 static char		*find_next_input(char *str)
 {
 	char	quote;
+	int		slash_count;
 
 	str--;
 	while (*(++str))
@@ -24,7 +25,17 @@ static char		*find_next_input(char *str)
 		{
 			quote = *(str++);
 			while (*str != quote)
+			{
+				slash_count = 0;
+				while ( *str == '\\' && quote == '"')
+				{
+					slash_count++;
+					str++;
+				}
+				if (slash_count && !(slash_count % 2))
+					str--;
 				str++;
+			}
 		}
 		if (*str == ' ')
 			return (str + 1);
@@ -36,6 +47,7 @@ static size_t	stringcount(char *str)
 {
 	int		i;
 	char	quote;
+	int		slash_count;
 
 	i = 1;
 	if (!(*str))
@@ -48,6 +60,14 @@ static size_t	stringcount(char *str)
 			quote = *(str++);
 			while (*str != quote)
 			{
+				slash_count = 0;
+				while (*str == '\\' && quote == '"')
+				{
+					str++;
+					slash_count++;
+				}
+				if (slash_count && !(slash_count % 2))
+					str--;
 				str++;
 			}
 		}
@@ -57,25 +77,41 @@ static size_t	stringcount(char *str)
 	return (i);
 }
 
-int				get_newsplit_len(char *str)
-{
-	int		i;
-	char	quote;
+// int				get_newsplit_len(char *str)
+// {
+// 	int		i;
+// 	char	quote;
+// 	int		slash_count;
 
-	i = 0;
-	while (*str != ' ' && *str)
-	{
-		if (*str == '"' || *str == '\'')
-		{
-			quote = *(str++);
-			while (*(str++) != quote)
-				i++;
-		}
-		else if (str++)
-			i++;
-	}
-	return (i);
-}
+// 	i = 0;
+// 	while (*str != ' ' && *str)
+// 	{
+// 		if (*str == '"' || *str == '\'')
+// 		{
+// 			quote = *(str++);
+// 			while (*str != quote)
+// 			{
+// 				slash_count = 0;
+// 				while ( *str == '\\' && quote == '"')
+// 				{
+// 					slash_count++;
+// 					str++;
+// 					i++;
+// 				}
+// 				if (slash_count && !(slash_count % 2))
+// 				{
+// 					str--;
+// 					i--;
+// 				}
+// 				str++;
+// 				i++;
+// 			}
+// 		}
+// 		else if (str++)
+// 			i++;
+// 	}
+// 	return (i);
+// }
 
 char			*newsplit(char *src)
 {
@@ -84,7 +120,7 @@ char			*newsplit(char *src)
 	char	quote;
 
 	quote = 0;
-	len = get_newsplit_len(src);
+	len = ft_strlen(src);
 	dst = malloc((len + 1) * sizeof(char));
 	if (!dst)
 		return (NULL);

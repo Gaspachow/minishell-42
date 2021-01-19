@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 12:35:13 by gsmets            #+#    #+#             */
-/*   Updated: 2021/01/18 18:04:52 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/01/19 19:05:39 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ int			parser_redir(char **input_address)
 	int 	i;
 	char 	*str;
 	char 	quote;
+	int		slash_count;
 
 	i = -1;
 	str = *input_address;
@@ -109,7 +110,17 @@ int			parser_redir(char **input_address)
 			quote = str[i];
 			i++;
 			while (str[i] != quote)
-			i++;
+			{
+				slash_count = 0;
+				while (str[i] == '\\' && quote == '"')
+				{
+					slash_count++;
+					i++;
+				}
+				if (slash_count && !(slash_count % 2))
+					i--;
+				i++;
+			}
 		}
 		if (str[i] == '>' || str[i] == '<')
 			{

@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 17:45:05 by gsmets            #+#    #+#             */
-/*   Updated: 2021/01/18 15:31:48 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/01/19 20:11:01 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void		input_copy(char *dst, char *src)
 {
 	char	quote;
+	int		slash_count;
 
 	while (*src)
 	{
@@ -25,7 +26,17 @@ void		input_copy(char *dst, char *src)
 			*(dst++) = *src;
 			quote = *(src++);
 			while (*src != quote)
+			{
+				slash_count = 0;
+				while (*src == '\\' && quote == '"')
+				{
+					*(dst++) = *(src++);
+					slash_count++;
+				}
+				if (slash_count && !(slash_count % 2))
+					*(dst--) = *(src--);
 				*(dst++) = *(src++);
+			}
 			*(dst++) = *(src++);
 		}
 		else
@@ -38,6 +49,7 @@ static int		input_len(char *str)
 {
 	int		i;
 	char	quote;
+	int		slash_count;
 
 	i = 0;
 	while (*str)
@@ -49,6 +61,18 @@ static int		input_len(char *str)
 			quote = *(str++);
 			while (*str != quote && *str)
 			{
+				slash_count = 0;
+				while (quote == '"' && *str == '\\')
+				{
+					i++;
+					str++;
+					slash_count++;
+				}
+				if (slash_count && !(slash_count % 2))
+				{
+					str--;
+					i--;
+				}
 				i++;
 				str++;
 			}
