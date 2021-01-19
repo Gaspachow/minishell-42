@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 15:47:26 by gsmets            #+#    #+#             */
-/*   Updated: 2021/01/18 17:49:35 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/01/19 13:45:24 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,20 +76,31 @@ int			parser_delegator(char *input, t_data *data, int piped)
 {
 	int		i;
 	char	quote;
+	int		slash_count;
 
 	i = 0;
 	while (input[i])
 	{
-		if (input[i] == '\'' || input[i] == '"')
+		if (input[i] == '"')
 		{
 			quote = input[i];
 			i++;
 			while (input[i] != quote)
 			{
-				if (input[i] == '$')
+				slash_count = 0;
+				while (input[i] == '\\' && i++ > 0)
+					slash_count++;
+				if (input[i] == '$' && !(slash_count % 2))
 					parser_variable(&input, &i, data);
 				i++;
 			}
+		}
+		if (input[i] == '\'')
+		{
+			quote = input[i];
+			i++;
+			while (input[i] != quote)
+				i++;
 		}
 		else if (input[i] == '|')
 			return (parser_pipe(input, i, data));
