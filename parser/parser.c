@@ -6,16 +6,33 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 17:45:05 by gsmets            #+#    #+#             */
-/*   Updated: 2021/01/19 20:11:01 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/01/20 16:18:24 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void		input_copy(char *dst, char *src)
+void			copy_inside_quotes(char **src, char **dst, char quote)
+{
+	int slash_count;
+
+	while (**src != quote)
+	{
+		slash_count = 0;
+		while (**src == '\\' && quote == '"')
+		{
+			*((*dst)++) = *((*src)++);
+			slash_count++;
+		}
+		if (slash_count && !(slash_count % 2))
+			*((*dst)--) = *((*src)--);
+		*((*dst)++) = *((*src)++);
+	}
+}
+
+void			input_copy(char *dst, char *src)
 {
 	char	quote;
-	int		slash_count;
 
 	while (*src)
 	{
@@ -25,18 +42,7 @@ void		input_copy(char *dst, char *src)
 		{
 			*(dst++) = *src;
 			quote = *(src++);
-			while (*src != quote)
-			{
-				slash_count = 0;
-				while (*src == '\\' && quote == '"')
-				{
-					*(dst++) = *(src++);
-					slash_count++;
-				}
-				if (slash_count && !(slash_count % 2))
-					*(dst--) = *(src--);
-				*(dst++) = *(src++);
-			}
+			copy_inside_quotes(&src, &dst, quote);
 			*(dst++) = *(src++);
 		}
 		else
@@ -49,7 +55,6 @@ static int		input_len(char *str)
 {
 	int		i;
 	char	quote;
-	int		slash_count;
 
 	i = 0;
 	while (*str)
@@ -59,23 +64,7 @@ static int		input_len(char *str)
 		else if (*str == '"' || *str == '\'')
 		{
 			quote = *(str++);
-			while (*str != quote && *str)
-			{
-				slash_count = 0;
-				while (quote == '"' && *str == '\\')
-				{
-					i++;
-					str++;
-					slash_count++;
-				}
-				if (slash_count && !(slash_count % 2))
-				{
-					str--;
-					i--;
-				}
-				i++;
-				str++;
-			}
+			quote_len(&str, &i, quote);
 			if (!*str)
 				return (-1);
 			str++;
@@ -86,7 +75,8 @@ static int		input_len(char *str)
 	}
 	return (i);
 }
-char		*input_cleaner(char *str)
+
+char			*input_cleaner(char *str)
 {
 	int		len;
 	char	*clean_input;
@@ -110,7 +100,7 @@ int				parser_start(char *user_input, t_data *data)
 	clean_input = input_cleaner(user_input);
 	if (clean_input == 0)
 	{
-		ft_putstr("This minishell does not support multiline commands\n");
+		ft_putstr("This minishell does not support multiline\n");
 		return (0);
 	}
 	if (!*clean_input)

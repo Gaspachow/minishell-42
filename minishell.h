@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 12:03:49 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/19 16:24:03 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/01/20 16:16:34 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void			free_env(char **env);
 char			**dup_env(char **env);
 
 int				parser_start(char *inputs, t_data *data);
+void			quote_len(char **str, int *i, char quote);
 char			**input_split(char *str);
 
 int				handle_basic(char *clean_input, t_data *data, int piped);
