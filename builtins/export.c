@@ -6,7 +6,7 @@
 /*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 15:35:31 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/18 11:21:01 by tpons            ###   ########.fr       */
+/*   Updated: 2021/01/20 14:28:36 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ int		var_index(char *name, t_data *data)
 	{
 		y = 0;
 		while (data->env[x][y] && data->env[x][y] == name[y]
-		&& data->env[x][y] != '=' && name[y] != '=')
+		&& data->env[x][y] != '=' && (name[y] != '\0' || name[y] != '='))
 			y++;
-		if (data->env[x][y] == '=' && name[y] == '=')
+		if (data->env[x][y] == '=' && (name[y] == '\0' || name[y] == '='))
 			return (x);
 		x++;
 	}

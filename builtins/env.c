@@ -6,7 +6,7 @@
 /*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 15:03:40 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/19 15:40:35 by tpons            ###   ########.fr       */
+/*   Updated: 2021/01/20 14:33:58 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,19 @@ int		print_export(char **env)
 
 int		handle_env(char **env)
 {
-	int	i;
+	int		i;
+	char	*str;
 
 	i = 0;
 	while (env[i])
 	{
-		ft_putstr(env[i++]);
-		ft_putchar('\n');
+		str = ft_strstr(env[i], "=");
+		if (str && (str + 1))
+		{
+			ft_putstr(env[i]);
+			ft_putchar('\n');
+		}
+		i++;
 	}
 	return (1);
 }
