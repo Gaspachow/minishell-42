@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 12:35:13 by gsmets            #+#    #+#             */
-/*   Updated: 2021/01/19 19:05:39 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/01/20 14:28:08 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ static char		*get_filename(char *str, int *j)
 	}
 	*j += i;
 	filename = malloc(i * sizeof(char));
+	if (!filename)
+		return (NULL);
 	i = 0;
 	k = 0;
 	while (str[i] != ' ' && str[i] != '|' && str[i] != ';' && str[i] != '>' && str[i] != '<' && str[i])

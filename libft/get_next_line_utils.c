@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 16:56:41 by gsmets            #+#    #+#             */
-/*   Updated: 2019/10/30 14:00:28 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/01/20 14:23:56 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 	len1 = ft_strlen(s1);
 	len2 = ft_strlen(s2);
-	if (!(new = malloc((len1 + len2 + 1) * sizeof(char))))
+	new = malloc((len1 + len2 + 1) * sizeof(char));
+	if (!new)
 	{
 		free((char *)s1);
 		free((char *)s2);
@@ -104,7 +105,8 @@ char	*ft_substr(char const *str, unsigned int index, size_t len)
 		return (NULL);
 	if (index >= ft_strlen(str))
 		len = 0;
-	if (!(new = malloc((len + 1) * sizeof(char))))
+	new = malloc((len + 1) * sizeof(char));
+	if (!new)
 	{
 		free((char *)str);
 		return (NULL);

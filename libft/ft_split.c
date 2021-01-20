@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 17:05:09 by gsmets            #+#    #+#             */
-/*   Updated: 2019/10/18 16:54:26 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/01/20 13:57:58 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ static char		*newsplit(char const *str, char c)
 	i = 0;
 	while (str[i] != c && str[i])
 		i++;
-	if (!(ptr = malloc((i + 1) * sizeof(char))))
+	ptr = malloc((i + 1) * sizeof(char));
+	if (!ptr)
 		return (NULL);
 	ft_memmove(ptr, str, i);
 	ptr[i] = '\0';
@@ -53,7 +54,8 @@ char			**ft_split(char const *str, char c)
 	if (str == NULL)
 		return (NULL);
 	count = stringcount(str, c);
-	if (!(tab = malloc((count + 1) * sizeof(char *))))
+	tab = malloc((count + 1) * sizeof(char *));
+	if (!tab)
 		return (NULL);
 	i = 0;
 	while (i < count)

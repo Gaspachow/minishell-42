@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/09 14:21:15 by gsmets            #+#    #+#             */
-/*   Updated: 2019/10/17 11:19:07 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/01/20 13:56:46 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,8 @@ char			*ft_itoa(int n)
 
 	ln = (long)n;
 	len = getitoalen(ln);
-	if (!(str = malloc((len + 1) * sizeof(char))))
+	str = malloc((len + 1) * sizeof(char));
+	if (!str)
 		return (NULL);
 	div = itoa_divpow(ln);
 	itoa_assign(str, len, div, ln);

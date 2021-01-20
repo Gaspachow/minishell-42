@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 12:20:07 by gsmets            #+#    #+#             */
-/*   Updated: 2021/01/11 13:31:55 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/01/20 14:26:39 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ int		get_next_line(int fd, char **line)
 
 	if (line == NULL || fd < 0 || BUFFER_SIZE <= 0)
 		return (-1);
-	if (!(buff = malloc(sizeof(char) * (BUFFER_SIZE + 1))))
+	buff = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (!buff)
 		return (-1);
 	while (!(check_nl(str[fd])) && ((ret = read(fd, buff, BUFFER_SIZE)) > 0))
 	{
@@ -54,11 +55,13 @@ int		create_line(char **str, char **line)
 		len++;
 	if ((*str)[len] == '\0')
 		return (last_line(str, line));
-	if (!(newline = malloc((len + 1) * sizeof(char))))
+	newline = malloc((len + 1) * sizeof(char));
+	if (!newline)
 		return (mega_error(newline, *str));
 	ft_memmove(newline, *str, len);
 	newline[len] = '\0';
-	if (!(tmp = ft_substr(*str, len + 1, (ft_strlen(*str) - (len + 1)))))
+	tmp = ft_substr(*str, len + 1, (ft_strlen(*str) - (len + 1)));
+	if (!tmp)
 		return (mega_error(newline, *str));
 	free(*str);
 	*str = tmp;
