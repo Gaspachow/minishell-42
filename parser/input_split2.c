@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 16:01:44 by gsmets            #+#    #+#             */
-/*   Updated: 2021/01/19 16:20:50 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/01/20 20:34:27 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	copy_newsplit(char *src, char *dst, char quote)
 				*(dst++) = *(src++);
 			src++;
 		}
-		if (*src == '"')
+		else if (*src == '"')
 		{
 			quote = *(src++);
 			while (*src != quote)
