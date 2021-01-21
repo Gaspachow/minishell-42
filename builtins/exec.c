@@ -6,7 +6,7 @@
 /*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 17:01:07 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/19 15:40:03 by tpons            ###   ########.fr       */
+/*   Updated: 2021/01/21 18:13:40 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,34 @@ char	**gen_paths(int index, t_data *data, char *input)
 	return (paths);
 }
 
-int		execute(char **inputs, t_data *data)
+int		execute_2(char **inputs, t_data *data)
 {
 	int			i;
-	int			index;
 	char		**paths;
+	int			index;
 	struct stat	statounet;
 
 	i = 1;
+	index = var_index("PATH=", data);
+	paths = gen_paths(index, data, inputs[0]);
+	while (paths[i])
+	{
+		stat(paths[i], &statounet);
+		if (statounet.st_mode & S_IXUSR)
+		{
+			execve(paths[i], inputs, data->env);
+			return (1);
+		}
+		i++;
+	}
+	return (0);
+}
+
+int		execute(char **inputs, t_data *data)
+{
+	int			index;
+	struct stat	statounet;
+
 	index = var_index("PATH=", data);
 	stat(inputs[0], &statounet);
 	if (statounet.st_mode & S_IXUSR)
@@ -57,23 +77,12 @@ int		execute(char **inputs, t_data *data)
 		execve(inputs[0], &inputs[0], data->env);
 		return (1);
 	}
-	else if (index > 0)
+	else if (index >= 0)
 	{
-		paths = gen_paths(index, data, inputs[0]);
-		while (paths[i])
-		{
-			stat(paths[i], &statounet);
-			if (statounet.st_mode & S_IXUSR)
-			{
-				execve(paths[i], inputs, data->env);
-				return (1);
-			}
-			i++;
-		}
-		return (0);
+		if (!execute_2(inputs, data))
+			return (0);
 	}
-	else
-		return (0);
+	return (0);
 }
 
 int		handle_exec(char **inputs, t_data *data)
