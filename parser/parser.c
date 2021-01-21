@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 17:45:05 by gsmets            #+#    #+#             */
-/*   Updated: 2021/01/20 16:18:24 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/01/21 13:39:05 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,9 @@ char			*input_cleaner(char *str)
 {
 	int		len;
 	char	*clean_input;
+	char	*str_start;
 
+	str_start = str;
 	while (*str == ' ' && *str)
 		str++;
 	len = input_len(str);
@@ -88,8 +90,12 @@ char			*input_cleaner(char *str)
 		return (0);
 	clean_input = (char *)malloc((len + 1) * sizeof(char));//malloc
 	if (!clean_input)
+	{
+		free(str_start);
 		return (0);//Need error function (malloc failed)
+	}
 	input_copy(clean_input, str);
+	free(str_start);
 	return (clean_input);
 }
 
@@ -104,6 +110,9 @@ int				parser_start(char *user_input, t_data *data)
 		return (0);
 	}
 	if (!*clean_input)
+	{
+		free(clean_input);
 		return (0);
+	}
 	return (parser_delegator(clean_input, data, 0));
 }
