@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 17:50:50 by gsmets            #+#    #+#             */
-/*   Updated: 2021/01/20 18:49:00 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/01/21 15:20:06 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static char		*find_next_input(char *str)
 			while (*str != quote)
 			{
 				slash_count = 0;
-				while (*str == '\\' && quote == '"' && slash_count++)
+				while (*str == '\\' && quote == '"' && ++slash_count)
 					str++;
 				if (slash_count && !(slash_count % 2))
 					str--;
@@ -55,7 +55,7 @@ static size_t	stringcount(char *str)
 			while (*str != quote)
 			{
 				slash_count = 0;
-				while (*str == '\\' && quote == '"' && slash_count++)
+				while (*str == '\\' && quote == '"' && ++slash_count)
 					str++;
 				if (slash_count && !(slash_count % 2))
 					str--;
