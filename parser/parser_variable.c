@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 12:35:13 by gsmets            #+#    #+#             */
-/*   Updated: 2021/01/16 13:00:01 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/01/21 14:02:07 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void			parser_variable(char **input_address, int *i, t_data *data)
 	free(new_input);
 	new_input = ft_strjoin(tmp, &(input_address[0][*i + 1 + len]));
 	len = ft_strlen(var_value);
+	free(tmp);
 	free(var_value);
 	free(*input_address);
 	*input_address = new_input;
