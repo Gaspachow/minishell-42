@@ -6,13 +6,13 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 17:14:30 by gsmets            #+#    #+#             */
-/*   Updated: 2021/01/21 17:16:30 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/01/21 17:39:52 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int			get_name_len(char *str)
+int		get_name_len(char *str)
 {
 	int i;
 
