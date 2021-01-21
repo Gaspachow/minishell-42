@@ -6,7 +6,7 @@
 /*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 15:35:31 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/20 14:28:36 by tpons            ###   ########.fr       */
+/*   Updated: 2021/01/21 16:24:05 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,24 @@ int		var_index(char *name, t_data *data)
 	{
 		y = 0;
 		while (data->env[x][y] && data->env[x][y] == name[y]
-		&& data->env[x][y] != '=' && (name[y] != '\0' || name[y] != '='))
+		&& name[y] != '\0' && name[y] != '=' &&
+		data->env[x][y] != '\0' && data->env[x][y] != '=')
 			y++;
-		if (data->env[x][y] == '=' && (name[y] == '\0' || name[y] == '='))
+		if ((data->env[x][y] == '\0' || data->env[x][y] == '=') &&
+		(name[y] == '\0' || name[y] == '='))
 			return (x);
 		x++;
 	}
-	return (0);
+	return (-1);
 }
 
 void	replace_var(char *new_var, t_data *data, int index)
 {
-	free(data->env[index]);
-	data->env[index] = ft_strdup(new_var);
+	if (ft_strchr(new_var, '='))
+	{
+		free(data->env[index]);
+		data->env[index] = ft_strdup(new_var);
+	}
 }
 
 char	**export_env(char **old_env, char *export)
@@ -95,7 +100,7 @@ int		handle_export(char **inputs, t_data *data)
 		while (inputs[i])
 		{
 			index = var_index(inputs[i], data);
-			if (index > 0)
+			if (index >= 0)
 				replace_var(inputs[i], data, index);
 			else
 			{
