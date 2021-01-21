@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 12:03:49 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/21 17:16:49 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/01/21 19:26:37 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,6 @@ char			*get_filename(char *str, int *j);
 void			input_copy(char *dst, char *src);
 char			*input_cleaner(char *str);
 void			copy_newsplit(char *src, char *dst, char quote);
+void			copy_newsplit_export(char *src, char  *dst);
 
 #endif
