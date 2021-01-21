@@ -6,11 +6,38 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 12:35:13 by gsmets            #+#    #+#             */
-/*   Updated: 2021/01/20 17:51:16 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/01/21 17:21:56 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+void		make_filename(char *src, char *dst, int i, int k)
+{
+	while (src[i] != ' ' && src[i] != '|' && src[i] != ';' && src[i] != '>' &&
+			src[i] != '<' && src[i])
+	{
+		if (src[i] == '\'')
+		{
+			while (src[++i] != '\'')
+				dst[k++] = src[i];
+			i++;
+		}
+		else if (src[i] == '"')
+		{
+			while (src[++i] != '"')
+			{
+				if (src[i] == '\\')
+					i++;
+				dst[k++] = src[i];
+			}
+			i++;
+		}
+		else
+			dst[k++] = src[i++];
+	}
+	dst[k] = '\0';
+}
 
 char		*get_filename(char *str, int *j)
 {
@@ -18,26 +45,14 @@ char		*get_filename(char *str, int *j)
 	int		k;
 	char	*filename;
 
-	i = 0;
-	while (str[i] != ' ' && str[i] != '|' && str[i] != ';' && str[i] != '>' &&
-			str[i] != '<' && str[i])
-	{
-		i++;
-	}
+	i = get_name_len(str);
 	*j += i;
-	filename = malloc(i * sizeof(char));
+	filename = malloc((i + 1) * sizeof(char));
 	if (!filename)
 		return (NULL);
 	i = 0;
 	k = 0;
-	while (str[i] != ' ' && str[i] != '|' && str[i] != ';' && str[i] != '>' &&
-			str[i] != '<' && str[i])
-	{
-		if (str[i] != '"' && str[i] != '\'')
-			filename[k++] = str[i];
-		i++;
-	}
-	filename[k] = '\0';
+	make_filename(str, filename, i, k);
 	return (filename);
 }
 

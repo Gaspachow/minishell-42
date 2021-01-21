@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 12:03:49 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/20 17:50:17 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/01/21 17:16:49 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void			parser_variable(char **input_address, int *i, t_data *data);
 int				parser_redir(char **input_address);
 void			handle_redir(char **input_address, int i);
 void			remove_redir_input(char **input_address, int i, int j);
+int				get_name_len(char *str);
 char			*get_filename(char *str, int *j);
 void			input_copy(char *dst, char *src);
 char			*input_cleaner(char *str);

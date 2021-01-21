@@ -6,11 +6,40 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 17:14:30 by gsmets            #+#    #+#             */
-/*   Updated: 2021/01/20 17:51:54 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/01/21 17:16:30 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+int			get_name_len(char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i] != ' ' && str[i] != '|' && str[i] != ';' && str[i] != '>' &&
+			str[i] != '<' && str[i])
+	{
+		if (str[i] == '\'')
+		{
+			while (str[++i] != '\'')
+				;
+			i++;
+		}
+		else if (str[i] == '"')
+		{
+			while (str[++i] != '"')
+			{
+				if (str[i] == '\\')
+					i++;
+			}
+			i++;
+		}
+		else
+			i++;
+	}
+	return (i);
+}
 
 void	redir_to(char *str, int j, int i, char **input_address)
 {
@@ -67,8 +96,8 @@ void	handle_redir(char **input_address, int i)
 	j = i;
 	if (str[i] == '>' && str[i + 1] != '>')
 		redir_to(str, j, i, input_address);
-	if (str[i] == '>' && str[i + 1] == '>')
+	else if (str[i] == '>' && str[i + 1] == '>')
 		redir_to_append(str, j, i, input_address);
-	if (str[i] == '<' && str[i + 1] != '<')
+	else if (str[i] == '<' && str[i + 1] != '<')
 		redir_from(str, j, i, input_address);
 }
