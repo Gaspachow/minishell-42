@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 17:50:50 by gsmets            #+#    #+#             */
-/*   Updated: 2021/01/21 15:20:06 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/01/21 18:54:14 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,19 @@ char			*newsplit(char *src)
 	return (dst);
 }
 
+// char			*newsplit_export(char *src)
+// {
+// 	int		len;
+// 	char	*dst;
+
+// 	len = ft_strlen(src);
+// 	dst = malloc((len * 2) * sizeof(char));
+// 	if (!dst)
+// 		return (NULL);
+// 	copy_newsplit_export(src, dst);
+// 	return (dst);
+// }
+
 char			**input_split(char *str)
 {
 	char	**inputs;
@@ -96,8 +109,11 @@ char			**input_split(char *str)
 	i = 0;
 	while (i < count)
 	{
-		inputs[i++] = newsplit(str);
-		if (!inputs)
+		// if (i > 0 && !ft_strcmp(inputs[0], "export"))
+		// 	inputs[i++] = newsplit_export(str);
+		// else
+			inputs[i++] = newsplit(str);
+		if (i > 0 && !inputs[i - 1])
 			return (NULL);
 		str = find_next_input(str);
 	}

@@ -6,13 +6,13 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 12:35:13 by gsmets            #+#    #+#             */
-/*   Updated: 2021/01/21 14:02:07 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/01/21 18:55:26 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static int		get_name_len(char *str)
+static int		get_filename_len(char *str)
 {
 	int len;
 
@@ -57,7 +57,7 @@ void			parser_variable(char **input_address, int *i, t_data *data)
 	char	*new_input;
 	char	*tmp;
 
-	len = get_name_len(&(input_address[0][*i + 1]));
+	len = get_filename_len(&(input_address[0][*i + 1]));
 	var_name = ft_substr(*input_address, *i + 1, len);
 	if (len == 1 && input_address[0][*i + 1])
 		var_value = ft_strdup(ft_itoa(data->status));
