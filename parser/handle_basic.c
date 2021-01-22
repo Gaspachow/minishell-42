@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_basic.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 19:01:43 by gsmets            #+#    #+#             */
-/*   Updated: 2021/01/20 19:08:12 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/01/22 16:36:56 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void		choose_action(char **inputs, t_data *data)
 	if (!ft_strcmp(inputs[0], "echo"))
 		handle_echo(inputs);
 	else if (!ft_strcmp(inputs[0], "pwd"))
-		handle_pwd();
+		handle_pwd(data);
 	else if (!ft_strcmp(inputs[0], "cd"))
 		handle_cd(inputs, data);
 	else if (!ft_strcmp(inputs[0], "env"))
