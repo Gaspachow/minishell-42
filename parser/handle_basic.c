@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 19:01:43 by gsmets            #+#    #+#             */
-/*   Updated: 2021/01/22 17:36:08 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/01/23 13:44:04 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,13 @@ void		free_inputs(char **inputs)
 	i = 0;
 	while (inputs[i])
 	{
-		write(1, inputs[i], ft_strlen(inputs[i]));
-		write(1, "\n", 1);
+		// write(2, "--", 2);
+		// write(2, inputs[i], ft_strlen(inputs[i]));
+		// write(2, "\n", 1);
 		free(inputs[i]);
 		i++;
 	}
-	// free(inputs);
+	free(inputs);
 }
 
 int			handle_basic(char *clean_input, t_data *data, int piped)
