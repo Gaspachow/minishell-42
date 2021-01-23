@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 17:14:30 by gsmets            #+#    #+#             */
-/*   Updated: 2021/01/21 17:39:52 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/01/23 19:27:12 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,63 +41,78 @@ int		get_name_len(char *str)
 	return (i);
 }
 
-void	redir_to(char *str, int j, int i, char **input_address)
+void	redir_to(char *str, int i, char **input, t_data *data)
 {
 	char	*filename;
 	int		fd;
+	int		j;
 
+	j = i;
 	if (str[j + 1] == ' ')
 		j++;
 	filename = get_filename(&(str[j + 1]), &j);
-	remove_redir_input(input_address, i, j);
+	remove_redir_input(input, i, j);
 	fd = open(filename, O_RDWR | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
 	free(filename);
 	dup2(fd, 1);
-	parser_redir(input_address);
+	if (data->fd_out != 1)
+		close(data->fd_out);
+	data->fd_out = fd;
+	parser_redir(input, data);
 }
 
-void	redir_to_append(char *str, int j, int i, char **input_address)
+void	redir_to_append(char *str, int i, char **input, t_data *data)
 {
 	char	*filename;
 	int		fd;
+	int		j;
 
+	j = i;
 	j++;
 	if (str[j + 1] == ' ')
 		j++;
 	filename = get_filename(&(str[j + 1]), &j);
-	remove_redir_input(input_address, i, j);
+	remove_redir_input(input, i, j);
 	fd = open(filename, O_RDWR | O_CREAT | O_APPEND);
 	free(filename);
 	dup2(fd, 1);
-	parser_redir(input_address);
+	if (data->fd_out != 1)
+		close(data->fd_out);
+	data->fd_out = fd;
+	parser_redir(input, data);
 }
 
-void	redir_from(char *str, int j, int i, char **input_address)
+void	redir_from(char *str, int i, char **input, t_data *data)
 {
 	char	*filename;
 	int		fd;
+	int		j;
 
+	j = i;
 	if (str[j + 1] == ' ')
 		j++;
 	filename = get_filename(&(str[j + 1]), &j);
-	remove_redir_input(input_address, i, j);
+	remove_redir_input(input, i, j);
 	fd = open(filename, O_RDONLY);
 	free(filename);
 	dup2(fd, 0);
-	parser_redir(input_address);
+	if (data->fd_in != 0)
+		close(data->fd_in);
+	data->fd_in = fd;
+	parser_redir(input, data);
 }
 
-void	handle_redir(char **input_address, int i)
+void	handle_redir(char **input, int i, t_data *data)
 {
 	char	*str;
 	int		j;
 
-	str = *input_address;
+	str = *input;
 	j = i;
 	if (str[i] == '>' && str[i + 1] != '>')
-		redir_to(str, j, i, input_address);
+		redir_to(str, i, input, data);
 	else if (str[i] == '>' && str[i + 1] == '>')
-		redir_to_append(str, j, i, input_address);
+		redir_to_append(str, i, input, data);
 	else if (str[i] == '<' && str[i + 1] != '<')
-		redir_from(str, j, i, input_address);
+		redir_from(str, i, input, data);
 }

@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 19:01:43 by gsmets            #+#    #+#             */
-/*   Updated: 2021/01/23 13:44:04 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/01/23 19:28:47 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,9 @@ void		choose_action(char **inputs, t_data *data)
 	else if (!ft_strcmp(inputs[0], "unset"))
 		handle_unset(inputs, data);
 	else
+	{
 		handle_exec(inputs, data);
+	}
 }
 
 void		free_inputs(char **inputs)
@@ -39,13 +41,24 @@ void		free_inputs(char **inputs)
 	i = 0;
 	while (inputs[i])
 	{
-		// write(2, "--", 2);
-		// write(2, inputs[i], ft_strlen(inputs[i]));
-		// write(2, "\n", 1);
 		free(inputs[i]);
 		i++;
 	}
 	free(inputs);
+}
+
+void		close_fds(t_data *data)
+{
+	if (data->fd_in != 0)
+	{
+		close(data->fd_in);
+		data->fd_in = 0;
+	}
+	if (data->fd_out != 1)
+	{
+		close(data->fd_out);
+		data->fd_out = 1;
+	}
 }
 
 int			handle_basic(char *clean_input, t_data *data, int piped)
@@ -56,7 +69,7 @@ int			handle_basic(char *clean_input, t_data *data, int piped)
 
 	oldfd1 = dup(1);
 	oldfd2 = dup(0);
-	parser_redir(&clean_input);
+	parser_redir(&clean_input, data);
 	clean_input = input_cleaner(clean_input);
 	inputs = input_split(clean_input);
 	free(clean_input);
@@ -66,5 +79,8 @@ int			handle_basic(char *clean_input, t_data *data, int piped)
 		exit(0);
 	dup2(oldfd1, 1);
 	dup2(oldfd2, 0);
+	close_fds(data);
+	close(oldfd1);
+	close(oldfd2);
 	return (0);
 }
