@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 12:04:28 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/19 13:05:53 by tpons            ###   ########.fr       */
+/*   Updated: 2021/01/23 15:23:28 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@ int	main(int ac, char **av, char **env)
 
 	ac = 0;
 	av = NULL;
-	data.status = 0;
 	data.env = dup_env(env);
+	data.fd_in = -42;
+	data.fd_out = -42;
 	if (!data.env)
 		exit(EXIT_FAILURE);
 	while (1)
