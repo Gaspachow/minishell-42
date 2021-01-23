@@ -6,7 +6,7 @@
 /*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 17:01:07 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/23 15:38:51 by tpons            ###   ########.fr       */
+/*   Updated: 2021/01/23 18:10:47 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int		execute_2(char **inputs, t_data *data)
 	int			index;
 	struct stat	statounet;
 
-	i = 1;
+	i = 0; //was = 1 ?
 	index = var_index("PATH=", data);
 	paths = gen_paths(index, data, inputs[0]);
 	while (paths[i])
@@ -62,6 +62,7 @@ int		execute_2(char **inputs, t_data *data)
 		}
 		i++;
 	}
+	//need to free paths
 	return (0);
 }
 
@@ -79,8 +80,8 @@ int		execute(char **inputs, t_data *data)
 	}
 	else if (index >= 0)
 	{
-		if (!execute_2(inputs, data))
-			return (0);
+		if (execute_2(inputs, data))
+			return (1);
 	}
 	return (0);
 }
