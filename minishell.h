@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 12:03:49 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/23 15:11:16 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/01/23 15:46:46 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -70,8 +69,9 @@ char			*get_filename(char *str, int *j);
 void			input_copy(char *dst, char *src);
 char			*input_cleaner(char *str);
 void			copy_newsplit(char *src, char *dst, char quote);
-void			copy_newsplit_export(char *src, char  *dst);
+void			copy_newsplit_export(char *src, char *dst);
 
+void			sig_exec_init(void);
 void			sig_init(void);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 17:01:07 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/21 18:13:40 by tpons            ###   ########.fr       */
+/*   Updated: 2021/01/23 15:38:51 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ int		handle_exec(char **inputs, t_data *data)
 		exit(EXIT_FAILURE);
 	else
 	{
+		sig_exec_init();
 		if (waitpid(pid, &status, 0) != pid)
 			status = -1;
 	}
