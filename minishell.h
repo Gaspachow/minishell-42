@@ -6,7 +6,7 @@
 /*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 12:03:49 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/22 16:26:12 by tpons            ###   ########.fr       */
+/*   Updated: 2021/01/23 14:53:25 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,9 @@
 typedef	struct	s_data
 {
 	char		**env;
-	int			status;
 }				t_data;
+
+int				g_status;
 
 int				envlen(char **env);
 void			free_env(char **env);
@@ -68,5 +69,7 @@ void			input_copy(char *dst, char *src);
 char			*input_cleaner(char *str);
 void			copy_newsplit(char *src, char *dst, char quote);
 void			copy_newsplit_export(char *src, char  *dst);
+
+void			sig_init(void);
 
 #endif
