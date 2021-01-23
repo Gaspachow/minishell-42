@@ -6,7 +6,7 @@
 /*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 17:01:07 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/23 18:10:47 by tpons            ###   ########.fr       */
+/*   Updated: 2021/01/23 18:39:33 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,9 @@ int		execute_2(char **inputs, t_data *data)
 		stat(paths[i], &statounet);
 		if (statounet.st_mode & S_IXUSR)
 		{
-			execve(paths[i], inputs, data->env);
-			return (1);
+			if (execve(paths[i], inputs, data->env) != -1)
+				return (1);
+			return (0);
 		}
 		i++;
 	}
@@ -75,8 +76,9 @@ int		execute(char **inputs, t_data *data)
 	stat(inputs[0], &statounet);
 	if (statounet.st_mode & S_IXUSR)
 	{
-		execve(inputs[0], &inputs[0], data->env);
-		return (1);
+		if (execve(inputs[0], &inputs[0], data->env) != -1)
+			return (1);
+		return (0);
 	}
 	else if (index >= 0)
 	{
@@ -97,6 +99,7 @@ int		handle_exec(char **inputs, t_data *data)
 	{
 		if (!execute(inputs, data))
 			exit(EXIT_FAILURE);
+		exit(EXIT_SUCCESS); //make sure child process is closed
 	}
 	else if (pid < 0)
 		exit(EXIT_FAILURE);
