@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 13:15:19 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/21 17:52:07 by tpons            ###   ########.fr       */
+/*   Updated: 2021/01/25 18:45:21 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ int		cd_alone(t_data *data)
 	replace_var(oldpwd, data, var_index("OLDPWD=", data));
 	free(oldpwd);
 	buf = getcwd(NULL, 0);
+	if (!buf)
+		exit(EXIT_FAILURE); /// safety if getcwd malloc failed
 	pwd = ft_strjoin("PWD=", buf);
 	free(buf);
 	replace_var(pwd, data, var_index(pwd, data));
@@ -82,7 +84,10 @@ int		cd_path(char **args, t_data *data)
 int		handle_cd(char **args, t_data *data)
 {
 	if (args[2])
-		return (0);//error
+	{
+		ft_putstr_fd("bash: cd: too many arguments\n", 2);
+		return (0);
+	}
 	else if (!args[1])
 	{
 		if (!cd_alone(data))
@@ -99,4 +104,5 @@ int		handle_cd(char **args, t_data *data)
 			return (0);
 	}
 	return (1);
+	// need support error 
 }

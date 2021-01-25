@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 17:48:49 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/22 16:40:21 by tpons            ###   ########.fr       */
+/*   Updated: 2021/01/25 17:34:05 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,3 +27,4 @@ int	handle_pwd(t_data *data)
 	ft_putstr("\n");
 	return (0);
 }
+// need to handle arguments
