@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 12:35:13 by gsmets            #+#    #+#             */
-/*   Updated: 2021/01/21 17:21:56 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/01/23 19:24:31 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void		parser_redir_quotes(char *str, int *i, char quote)
 	}
 }
 
-int			parser_redir(char **input_address)
+int			parser_redir(char **input_address, t_data *data)
 {
 	int		i;
 	char	*str;
@@ -104,7 +104,7 @@ int			parser_redir(char **input_address)
 		}
 		if (str[i] == '>' || str[i] == '<')
 		{
-			handle_redir(input_address, i);
+			handle_redir(input_address, i, data);
 			return (1);
 		}
 	}
