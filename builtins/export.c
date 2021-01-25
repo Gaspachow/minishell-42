@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 15:35:31 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/21 16:24:05 by tpons            ###   ########.fr       */
+/*   Updated: 2021/01/25 16:55:49 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	**export_env(char **old_env, char *export)
 	i = 0;
 	new_env = malloc(sizeof(char *) * (envlen(old_env) + 1));
 	if (!new_env)
-		return (0);
+		exit(EXIT_FAILURE);
 	while (old_env[i])
 	{
 		new_env[i] = ft_strdup(old_env[i]);
