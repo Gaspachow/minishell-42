@@ -6,7 +6,7 @@
 /*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/23 14:32:04 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/25 16:29:28 by tpons            ###   ########.fr       */
+/*   Updated: 2021/01/25 16:42:55 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void	handle_sig(int sig)
 	if (sig == SIGINT)
 	{
 		g_status = 130;
-		write(1, "\n", 1);
-		ft_putstr("minishell> ");
+		write(2, "\n", 1);
+		ft_putstr_fd("minishell> ", 2);
 	}
 	else if (sig == SIGQUIT)
 		write(2, "\b\b  \b\b", 6);
@@ -37,12 +37,12 @@ void	handle_exec_sig(int sig)
 	if (sig == SIGINT)
 	{
 		g_status = 130;
-		write(1, "\n", 1);
+		write(2, "\n", 1);
 	}
 	else if (sig == SIGQUIT)
 	{
 		g_status = 131;
-		ft_putstr("Exit (core dumped)\n");
+		ft_putstr_fd("Exit (core dumped)\n", 2);
 	}
 }
 

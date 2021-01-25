@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 12:04:28 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/23 18:35:18 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/01/25 16:42:17 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	main(int ac, char **av, char **env)
 	while (1)
 	{
 		sig_init();
-		ft_putstr("minishell> ");
+		ft_putstr_fd("minishell> ", 2);
 		if (get_next_line(0, &user_input) == 0)
 			exit(EXIT_FAILURE);
 		parser_start(user_input, &data);
