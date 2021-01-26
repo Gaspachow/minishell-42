@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 19:01:43 by gsmets            #+#    #+#             */
-/*   Updated: 2021/01/23 19:28:47 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/01/26 20:29:01 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,12 @@ int			handle_basic(char *clean_input, t_data *data, int piped)
 	free(clean_input);
 	choose_action(inputs, data);
 	free_inputs(inputs);
-	if (piped)
-		exit(0);
 	dup2(oldfd1, 1);
 	dup2(oldfd2, 0);
 	close_fds(data);
 	close(oldfd1);
 	close(oldfd2);
+	if (piped)
+		exit(0);
 	return (0);
 }

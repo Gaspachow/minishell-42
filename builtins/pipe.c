@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 15:50:16 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/19 15:41:10 by tpons            ###   ########.fr       */
+/*   Updated: 2021/01/26 20:48:13 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int		handle_pipe(char *input1, char *input2, t_data *data)
 		exit(EXIT_FAILURE);
 	else
 	{
+		free(input1);
 		if (waitpid(pid, &status, 0) != pid)
 			exit(EXIT_FAILURE);
 		oldfd = dup(0);
