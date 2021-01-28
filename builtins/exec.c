@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 17:01:07 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/23 18:39:33 by tpons            ###   ########.fr       */
+/*   Updated: 2021/01/28 19:34:00 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ int		execute_2(char **inputs, t_data *data)
 	int			index;
 	struct stat	statounet;
 
+	ft_putstr_fd(inputs[0], 2);
+	ft_putstr_fd("---\n", 2);
 	i = 0; //was = 1 ?
 	index = var_index("PATH=", data);
 	paths = gen_paths(index, data, inputs[0]);
@@ -72,6 +74,8 @@ int		execute(char **inputs, t_data *data)
 	int			index;
 	struct stat	statounet;
 
+	ft_putstr_fd(inputs[0], 1);
+	ft_putstr_fd("---\n", 1);
 	index = var_index("PATH=", data);
 	stat(inputs[0], &statounet);
 	if (statounet.st_mode & S_IXUSR)
@@ -97,6 +101,7 @@ int		handle_exec(char **inputs, t_data *data)
 	pid = fork();
 	if (pid == 0)
 	{
+	//	write(1, "don't delete this line", 0);
 		if (!execute(inputs, data))
 			exit(EXIT_FAILURE);
 		exit(EXIT_SUCCESS); //make sure child process is closed
@@ -108,6 +113,7 @@ int		handle_exec(char **inputs, t_data *data)
 		sig_exec_init();
 		if (waitpid(pid, &status, 0) != pid)
 			status = -1;
+	//	write(1, "don't delete this line", 0);
 	}
 	return (pid);
 }
