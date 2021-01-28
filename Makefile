@@ -47,3 +47,5 @@ re: fclean all
 %.o: %.c
 	$(CLANG) $(FLAGS) -c $<  -o $(<:.c=.o)
 
+
+# valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --log-file=valgrind-out.txt ./minishell
