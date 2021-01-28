@@ -6,7 +6,7 @@
 /*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 19:01:43 by gsmets            #+#    #+#             */
-/*   Updated: 2021/01/28 15:56:42 by tpons            ###   ########.fr       */
+/*   Updated: 2021/01/28 16:02:41 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void		choose_action(char **inputs, t_data *data)
 	else if (!ft_strcmp(inputs[0], "env"))
 		handle_env(data->env);
 	else if (!ft_strcmp(inputs[0], "exit"))
-		exit_mini(inputs, data);
+		handle_exit(inputs, data);
 	else if (!ft_strcmp(inputs[0], "export"))
 		handle_export(inputs, data);
 	else if (!ft_strcmp(inputs[0], "unset"))

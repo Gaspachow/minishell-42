@@ -6,7 +6,7 @@
 /*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 12:03:49 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/28 15:57:00 by tpons            ###   ########.fr       */
+/*   Updated: 2021/01/28 16:02:59 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,6 @@ void			copy_newsplit_export(char *src, char *dst);
 void			sig_exec_init(void);
 void			sig_init(void);
 
-void			exit_mini(char **inputs, t_data *data);
+void			handle_exit(char **inputs, t_data *data);
 
 #endif
