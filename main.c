@@ -6,7 +6,7 @@
 /*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 12:04:28 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/25 16:42:17 by tpons            ###   ########.fr       */
+/*   Updated: 2021/01/28 15:19:16 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	main(int ac, char **av, char **env)
 {
 	t_data	data;
+	int		gnl;
 	char	*user_input;
 
 	ac = 0;
@@ -29,9 +30,17 @@ int	main(int ac, char **av, char **env)
 	{
 		sig_init();
 		ft_putstr_fd("minishell> ", 2);
-		if (get_next_line(0, &user_input) == 0)
+		gnl = get_next_line(0, &user_input);
+		if (gnl == -1)
 			exit(EXIT_FAILURE);
-		parser_start(user_input, &data);
+		else if (gnl == 0)
+		{
+			free_env(data.env);
+			free(user_input);
+			exit(EXIT_SUCCESS);
+		}
+		else if (gnl > 0)
+			parser_start(user_input, &data);
 	}
 	return (0);
 }
