@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 17:01:07 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/28 19:34:00 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/01/28 20:01:39 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,7 @@ int		execute_2(char **inputs, t_data *data)
 	int			index;
 	struct stat	statounet;
 
-	ft_putstr_fd(inputs[0], 2);
-	ft_putstr_fd("---\n", 2);
-	i = 0; //was = 1 ?
+	i = 0;
 	index = var_index("PATH=", data);
 	paths = gen_paths(index, data, inputs[0]);
 	while (paths[i])
@@ -74,16 +72,11 @@ int		execute(char **inputs, t_data *data)
 	int			index;
 	struct stat	statounet;
 
-	ft_putstr_fd(inputs[0], 1);
-	ft_putstr_fd("---\n", 1);
 	index = var_index("PATH=", data);
 	stat(inputs[0], &statounet);
-	if (statounet.st_mode & S_IXUSR)
-	{
-		if (execve(inputs[0], &inputs[0], data->env) != -1)
+	if ((statounet.st_mode & S_IXUSR) &&
+	(execve(inputs[0], &inputs[0], data->env) != -1))
 			return (1);
-		return (0);
-	}
 	else if (index >= 0)
 	{
 		if (execute_2(inputs, data))
@@ -101,10 +94,9 @@ int		handle_exec(char **inputs, t_data *data)
 	pid = fork();
 	if (pid == 0)
 	{
-	//	write(1, "don't delete this line", 0);
 		if (!execute(inputs, data))
 			exit(EXIT_FAILURE);
-		exit(EXIT_SUCCESS); //make sure child process is closed
+		exit(EXIT_SUCCESS);
 	}
 	else if (pid < 0)
 		exit(EXIT_FAILURE);
@@ -113,7 +105,6 @@ int		handle_exec(char **inputs, t_data *data)
 		sig_exec_init();
 		if (waitpid(pid, &status, 0) != pid)
 			status = -1;
-	//	write(1, "don't delete this line", 0);
 	}
 	return (pid);
 }
