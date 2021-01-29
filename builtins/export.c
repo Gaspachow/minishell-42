@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 15:35:31 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/25 16:55:49 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/01/29 11:14:29 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	export_alone(t_data *data)
 	char	*swap;
 
 	i = 0;
-	temp_env = dup_env(data->env);
+	temp_env = copy_export_env(data->env);
 	while (temp_env[i + 1])
 	{
 		j = i + 1;

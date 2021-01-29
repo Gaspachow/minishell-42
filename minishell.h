@@ -6,7 +6,7 @@
 /*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 12:03:49 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/28 16:02:59 by tpons            ###   ########.fr       */
+/*   Updated: 2021/01/29 10:19:06 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void			handle_unset(char **inputs, t_data *data);
 void			replace_var(char *new_var, t_data *data, int index);
 int				var_index(char *name, t_data *data);
 int				print_export(char **env);
+char			**copy_export_env(char **env);
 int				handle_export(char **args, t_data *data);
 
 int				handle_pipe(char *input1, char *input2, t_data *data);

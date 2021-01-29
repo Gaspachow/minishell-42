@@ -5,9 +5,9 @@ SRCS	+= parser/parser.c parser/input_split.c parser/input_split2.c parser/parser
 
 SRCS	+= parser/parser2.c parser/parser_redir2.c parser/handle_basic.c
 
-SRCS	+= builtins/echo.c builtins/pwd.c builtins/cd.c builtins/exec.c builtins/env.c builtins/export.c builtins/unset.c
+SRCS	+= builtins/echo.c builtins/pwd.c builtins/cd.c builtins/exec.c builtins/env.c builtins/export_utils.c
 
-SRCS	+= builtins/pipe.c builtins/signal.c builtins/exit.c
+SRCS	+= builtins/export.c builtins/unset.c builtins/pipe.c builtins/signal.c builtins/exit.c
 
 LIBFT	= libft/libft.a
 
