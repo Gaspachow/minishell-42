@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 17:45:05 by gsmets            #+#    #+#             */
-/*   Updated: 2021/01/25 16:58:22 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/01/29 18:16:43 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,13 @@ void			input_copy(char *dst, char *src)
 			quote = *(src++);
 			copy_inside_quotes(&src, &dst, quote);
 			*(dst++) = *(src++);
+		}
+		else if (*src == '\\' && *(src + 1))
+		{
+			src++;
+			*(dst++) = '\'';
+			*(dst++) = *(src++);
+			*(dst++) = '\'';
 		}
 		else
 			*(dst++) = *(src++);
