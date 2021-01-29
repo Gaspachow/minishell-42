@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 12:35:13 by gsmets            #+#    #+#             */
-/*   Updated: 2021/01/23 16:40:09 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/01/29 16:54:12 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,34 @@ static int		get_filename_len(char *str)
 	if (!len && str[len] == '?')
 		return (1);
 	return (len);
+}
+
+static void		add_escaped_char(char *src, char *dst, int *i, int *j)
+{
+	dst[(*j)++] = '\\';
+	dst[(*j)++] = src[(*i)++];
+}
+
+static char		*dup_value(char *str)
+{
+	int		maxlen;
+	char	*value;
+	int		i;
+	int		j;
+
+	maxlen = ft_strlen(str) * 2;
+	value = malloc((maxlen + 1) * sizeof(char));
+	i = 0;
+	j = 0;
+	while (str[i])
+	{
+		if (str[i] == '\\' || str[i] == '$' || str[i] == '"' || str[i] == '\'')
+			add_escaped_char(str, value, &i, &j);
+		else
+			value[j++] = str[i++];
+	}
+	value[j] = '\0';
+	return (value);
 }
 
 static char		*get_value(char *name, t_data *data)
@@ -43,7 +71,7 @@ static char		*get_value(char *name, t_data *data)
 			j++;
 		}
 		if (env[i][j] == '=' && !name[k])
-			return (ft_strdup(&env[i][j + 1]));
+			return (dup_value(&env[i][j + 1]));
 		i++;
 	}
 	return (NULL);
@@ -59,7 +87,7 @@ void			parser_variable(char **input_address, int *i, t_data *data)
 
 	len = get_filename_len(&(input_address[0][*i + 1]));
 	var_name = ft_substr(*input_address, *i + 1, len);
-	if (len == 1 && input_address[0][*i + 1])
+	if (len == 1 && input_address[0][*i + 1] == '?')
 		var_value = ft_strdup(ft_itoa(g_status));
 	else if (len)
 		var_value = get_value(var_name, data);
