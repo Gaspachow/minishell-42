@@ -6,7 +6,7 @@
 /*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 15:35:31 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/30 11:35:39 by tpons            ###   ########.fr       */
+/*   Updated: 2021/01/30 13:33:33 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	export_alone(t_data *data)
 	free_env(temp_env);
 }
 
-int		handle_export(char **inputs, t_data *data)
+void	handle_export(char **inputs, t_data *data)
 {
 	int	i;
 	int	index;
@@ -109,11 +109,11 @@ int		handle_export(char **inputs, t_data *data)
 					exit(EXIT_FAILURE);
 			}
 			else
-				ft_putstr("export: bad identifier\n");
+				return (error_sentence("export: bad identifier\n", 1));
 			i++;
 		}
 	}
 	else
 		export_alone(data);
-	return (1);
+	g_status = 0;
 }

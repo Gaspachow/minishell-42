@@ -6,7 +6,7 @@
 /*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 12:03:49 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/30 11:34:33 by tpons            ###   ########.fr       */
+/*   Updated: 2021/01/30 13:28:06 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char			**input_split(char *str);
 int				handle_basic(char *clean_input, t_data *data, int piped);
 int				handle_echo(char **args);
 int				handle_pwd(t_data *data);
-int				handle_cd(char **args, t_data *data);
+void			handle_cd(char **args, t_data *data);
 int				handle_exec(char **args, t_data *data);
 int				handle_env(char **env);
 void			handle_unset(char **inputs, t_data *data);
@@ -58,7 +58,7 @@ int				var_index(char *name, t_data *data);
 int				print_export(char **env);
 int				check_export(char *str);
 char			**copy_export_env(char **env);
-int				handle_export(char **args, t_data *data);
+void			handle_export(char **args, t_data *data);
 
 int				handle_pipe(char *input1, char *input2, t_data *data);
 int				parser_delegator(char *input, t_data *data, int piped);
@@ -75,6 +75,7 @@ void			copy_newsplit(char *src, char *dst, char quote);
 void			sig_exec_init(void);
 void			sig_init(void);
 
+void			error_sentence(char *str, int status);
 void			handle_exit(char **inputs, t_data *data);
 
 #endif
