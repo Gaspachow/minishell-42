@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 12:03:49 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/29 17:06:38 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/01/30 11:34:33 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void			handle_unset(char **inputs, t_data *data);
 void			replace_var(char *new_var, t_data *data, int index);
 int				var_index(char *name, t_data *data);
 int				print_export(char **env);
+int				check_export(char *str);
 char			**copy_export_env(char **env);
 int				handle_export(char **args, t_data *data);
 

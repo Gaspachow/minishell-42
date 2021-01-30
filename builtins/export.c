@@ -6,7 +6,7 @@
 /*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 15:35:31 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/29 16:43:12 by tpons            ###   ########.fr       */
+/*   Updated: 2021/01/30 11:35:39 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,14 +100,16 @@ int		handle_export(char **inputs, t_data *data)
 		while (inputs[i])
 		{
 			index = var_index(inputs[i], data);
-			if (index >= 0)
+			if (index >= 0 && check_export(inputs[i]))
 				replace_var(inputs[i], data, index);
-			else
+			else if (check_export(inputs[i]))
 			{
 				data->env = export_env(data->env, inputs[i]);
 				if (!data->env)
 					exit(EXIT_FAILURE);
 			}
+			else
+				ft_putstr("export: bad identifier\n");
 			i++;
 		}
 	}
