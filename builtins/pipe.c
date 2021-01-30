@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 15:50:16 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/26 20:48:13 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/01/30 13:05:51 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int		handle_pipe(char *input1, char *input2, t_data *data)
 	pid = fork();
 	if (pid == 0)
 	{
+		free(input2);
 		dup2(fds[1], 1);
 		close(fds[0]);
 		close(fds[1]);
