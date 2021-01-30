@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 12:35:13 by gsmets            #+#    #+#             */
-/*   Updated: 2021/01/29 16:54:12 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/01/30 16:14:05 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void			parser_variable(char **input_address, int *i, t_data *data)
 	len = get_filename_len(&(input_address[0][*i + 1]));
 	var_name = ft_substr(*input_address, *i + 1, len);
 	if (len == 1 && input_address[0][*i + 1] == '?')
-		var_value = ft_strdup(ft_itoa(g_status));
+		var_value = ft_itoa(g_status);
 	else if (len)
 		var_value = get_value(var_name, data);
 	else
