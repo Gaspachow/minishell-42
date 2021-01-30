@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 17:01:07 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/28 20:01:39 by tpons            ###   ########.fr       */
+/*   Updated: 2021/01/30 12:38:02 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int		execute_2(char **inputs, t_data *data)
 	struct stat	statounet;
 
 	i = 0;
+	statounet.st_mode = 0;
 	index = var_index("PATH=", data);
 	paths = gen_paths(index, data, inputs[0]);
 	while (paths[i])
@@ -72,6 +73,7 @@ int		execute(char **inputs, t_data *data)
 	int			index;
 	struct stat	statounet;
 
+	statounet.st_mode = 0;
 	index = var_index("PATH=", data);
 	stat(inputs[0], &statounet);
 	if ((statounet.st_mode & S_IXUSR) &&
