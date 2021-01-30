@@ -6,7 +6,7 @@
 /*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 15:35:31 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/30 15:31:25 by tpons            ###   ########.fr       */
+/*   Updated: 2021/01/30 16:58:45 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ int		print_export(char **env)
 	int j;
 	int	equal;
 
-	i = 0;
-	while (env[i])
+	i = -1;
+	while (env[++i])
 	{
 		equal = 1;
 		j = 0;
@@ -53,7 +53,6 @@ int		print_export(char **env)
 		if (equal != 1)
 			write(1, "\"", 1);
 		write(1, "\n", 1);
-		i++;
 	}
 	return (1);
 }
