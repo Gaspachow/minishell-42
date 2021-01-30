@@ -6,30 +6,11 @@
 /*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 11:12:35 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/19 15:40:22 by tpons            ###   ########.fr       */
+/*   Updated: 2021/01/30 15:39:03 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-int		varname_index(char *name, t_data *data)
-{
-	int		y;
-	int		x;
-
-	x = 0;
-	while (data->env[x])
-	{
-		y = 0;
-		while (data->env[x][y] && data->env[x][y] == name[y]
-		&& data->env[x][y] != '=' && name[y] != '\0')
-			y++;
-		if (data->env[x][y] == '=' && name[y] == '\0')
-			return (x);
-		x++;
-	}
-	return (0);
-}
 
 char	**unset_env(char **old_env, int index)
 {
@@ -65,7 +46,7 @@ void	handle_unset(char **inputs, t_data *data)
 	i = 1;
 	while (inputs[i])
 	{
-		index = varname_index(inputs[i], data);
+		index = var_index(inputs[i], data);
 		if (index > 0)
 			data->env = unset_env(data->env, index);
 		i++;

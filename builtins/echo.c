@@ -6,7 +6,7 @@
 /*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 16:10:26 by gsmets            #+#    #+#             */
-/*   Updated: 2021/01/13 12:27:55 by tpons            ###   ########.fr       */
+/*   Updated: 2021/01/30 14:31:00 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,14 @@
 **	should use dup later !!!
 */
 
-int	handle_echo(char **args)
+void	handle_echo(char **args)
 {
 	int i;
 	int n_flag;
 
 	i = 1;
 	n_flag = 0;
+	g_status = 0;
 	while (args[i] && !ft_strcmp(args[i], "-n") && i++)
 		n_flag = 1;
 	while (args[i])
@@ -36,5 +37,4 @@ int	handle_echo(char **args)
 	}
 	if (!n_flag)
 		write(1, "\n", 1);
-	return (0);
 }

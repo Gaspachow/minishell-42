@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 12:03:49 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/30 14:23:17 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/01/30 15:15:33 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,11 @@ void			quote_len(char **str, int *i, char quote);
 char			**input_split(char *str);
 
 int				handle_basic(char *clean_input, t_data *data, int piped);
-int				handle_echo(char **args);
-int				handle_pwd(t_data *data);
+void			handle_echo(char **args);
+void			handle_pwd(t_data *data);
 void			handle_cd(char **args, t_data *data);
 int				handle_exec(char **args, t_data *data);
-int				handle_env(char **env);
+void			handle_env(char **env);
 void			handle_unset(char **inputs, t_data *data);
 
 void			replace_var(char *new_var, t_data *data, int index);

@@ -6,7 +6,7 @@
 /*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 15:03:40 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/29 16:55:33 by tpons            ###   ########.fr       */
+/*   Updated: 2021/01/30 14:35:50 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ char	**dup_env(char **env)
 	return (data_env);
 }
 
-int		handle_env(char **env)
+void	handle_env(char **env)
 {
 	int		i;
 	int		j;
@@ -74,5 +74,5 @@ int		handle_env(char **env)
 		}
 		i++;
 	}
-	return (1);
+	g_status = 0;
 }
