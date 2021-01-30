@@ -6,7 +6,7 @@
 /*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 17:01:07 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/30 16:18:28 by tpons            ###   ########.fr       */
+/*   Updated: 2021/01/30 16:55:00 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ char	**gen_paths(int index, t_data *data, char *input)
 	i = 0;
 	str = ft_strdup(&data->env[index][5]);
 	paths = ft_split(str, ':');
+	free(str);
 	while (paths[i])
 	{
 		temp = paths[i];
@@ -56,12 +57,9 @@ int		execute_2(char **inputs, t_data *data)
 	while (paths[i])
 	{
 		stat(paths[i], &statounet);
-		if (statounet.st_mode & S_IXUSR)
-		{
-			if (execve(paths[i], inputs, data->env) != -1)
-				return (0);
-			return (1);
-		}
+		if ((statounet.st_mode & S_IXUSR) &&
+		(execve(paths[i], inputs, data->env) != -1))
+			return (0);
 		i++;
 	}
 	free_env(paths);
@@ -78,7 +76,7 @@ int		execute(char **inputs, t_data *data)
 	stat(inputs[0], &statounet);
 	if ((statounet.st_mode & S_IXUSR) &&
 	(execve(inputs[0], &inputs[0], data->env) != -1))
-			return (0);
+		return (0);
 	else if (index >= 0)
 	{
 		if (!execute_2(inputs, data))
@@ -87,12 +85,43 @@ int		execute(char **inputs, t_data *data)
 	return (1);
 }
 
+int		check_exec(char **inputs, t_data *data)
+{
+	int			i;
+	char		**paths;
+	int			index;
+	struct stat	statounet;
+
+	i = 0;
+	statounet.st_mode = 0;
+	index = var_index("PATH=", data);
+	paths = gen_paths(index, data, inputs[0]);
+	index = 0;
+	stat(inputs[0], &statounet);
+	if (statounet.st_mode & S_IXUSR)
+		index = 1;
+	else
+	{
+		while (paths[i])
+		{
+			stat(paths[i], &statounet);
+			if (statounet.st_mode & S_IXUSR)
+				index = 1;
+			i++;
+		}
+	}
+	free_env(paths);
+	return (index);
+}
+
 void	handle_exec(char **inputs, t_data *data)
 {
 	pid_t	pid;
 	int		status;
 
 	status = 0;
+	if (!check_exec(inputs, data))
+		return (error_sentence("\t\tminishell: Unknown command\n", 127));
 	pid = fork();
 	if (pid == 0)
 	{
