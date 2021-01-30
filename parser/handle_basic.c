@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_basic.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 19:01:43 by gsmets            #+#    #+#             */
-/*   Updated: 2021/01/28 16:02:41 by tpons            ###   ########.fr       */
+/*   Updated: 2021/01/30 14:48:37 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,12 @@ void		close_fds(t_data *data)
 	}
 }
 
+void		exit_pipe(t_data *data)
+{
+	free_inputs(data->env);
+	exit (EXIT_SUCCESS);
+}
+
 int			handle_basic(char *clean_input, t_data *data, int piped)
 {
 	char	**inputs;
@@ -69,8 +75,14 @@ int			handle_basic(char *clean_input, t_data *data, int piped)
 
 	oldfd1 = dup(1);
 	oldfd2 = dup(0);
+	ft_putstr(clean_input);
+	ft_putstr("\n");
 	parser_redir(&clean_input, data);
+	ft_putstr(clean_input);
+	ft_putstr("\n");
 	clean_input = input_cleaner(clean_input);
+	ft_putstr(clean_input);
+	ft_putstr("\n");
 	inputs = input_split(clean_input);
 	free(clean_input);
 	choose_action(inputs, data);
@@ -81,6 +93,6 @@ int			handle_basic(char *clean_input, t_data *data, int piped)
 	close(oldfd1);
 	close(oldfd2);
 	if (piped)
-		exit(0);
+		exit_pipe(data);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 17:45:05 by gsmets            #+#    #+#             */
-/*   Updated: 2021/01/29 18:16:43 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/01/30 14:55:36 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,7 @@ void			input_copy(char *dst, char *src)
 			*(dst++) = *(src++);
 		}
 		else if (*src == '\\' && *(src + 1))
-		{
-			src++;
-			*(dst++) = '\'';
-			*(dst++) = *(src++);
-			*(dst++) = '\'';
-		}
+			escape_char(&dst, &src);
 		else
 			*(dst++) = *(src++);
 	}
@@ -68,6 +63,11 @@ static int		input_len(char *str)
 	{
 		if (*str == ' ' && (*(str + 1) == ' ' || *(str + 1) == '\0'))
 			str++;
+		else if (*str == '\\')
+		{
+			str += 2;
+			i += 4;
+		}
 		else if (*str == '"' || *str == '\'')
 		{
 			quote = *(str++);

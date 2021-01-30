@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 16:11:02 by gsmets            #+#    #+#             */
-/*   Updated: 2021/01/20 16:11:17 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/01/30 14:46:55 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,19 @@ void			quote_len(char **str, int *i, char quote)
 		(*i)++;
 		(*str)++;
 	}
+}
+
+void			escape_char(char **dst, char **src)
+{
+	char	quote;
+
+	(*src)++;
+	if (**src == '\'')
+		quote = '"';
+	else
+		quote = '\'';
+	*((*dst)++) = quote;
+	*((*dst)++) = *((*src)++);
+	*((*dst)++) = quote;
+	
 }
