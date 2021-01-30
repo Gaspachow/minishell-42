@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 13:15:19 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/25 18:45:21 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/01/30 12:33:11 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int		cd_path(char **args, t_data *data)
 
 int		handle_cd(char **args, t_data *data)
 {
-	if (args[2])
+	if (args[1] && args[2])
 	{
 		ft_putstr_fd("bash: cd: too many arguments\n", 2);
 		return (0);
@@ -91,7 +91,7 @@ int		handle_cd(char **args, t_data *data)
 	else if (!args[1])
 	{
 		if (!cd_alone(data))
-			return (0);
+			return (0); //ft_putstr("cd: HOME is undefined\n");
 	}
 	else if (ft_strcmp(args[1], "-") == 0)
 	{
