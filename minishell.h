@@ -6,7 +6,7 @@
 /*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 12:03:49 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/30 15:15:33 by tpons            ###   ########.fr       */
+/*   Updated: 2021/01/30 15:53:11 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int				handle_basic(char *clean_input, t_data *data, int piped);
 void			handle_echo(char **args);
 void			handle_pwd(t_data *data);
 void			handle_cd(char **args, t_data *data);
-int				handle_exec(char **args, t_data *data);
+void			handle_exec(char **args, t_data *data);
 void			handle_env(char **env);
 void			handle_unset(char **inputs, t_data *data);
 

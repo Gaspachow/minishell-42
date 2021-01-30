@@ -6,7 +6,7 @@
 /*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 17:01:07 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/30 14:52:35 by tpons            ###   ########.fr       */
+/*   Updated: 2021/01/30 16:18:28 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,13 @@ int		execute_2(char **inputs, t_data *data)
 		if (statounet.st_mode & S_IXUSR)
 		{
 			if (execve(paths[i], inputs, data->env) != -1)
-				return (1);
-			return (0);
+				return (0);
+			return (1);
 		}
 		i++;
 	}
 	free_env(paths);
-	return (0);
+	return (1);
 }
 
 int		execute(char **inputs, t_data *data)
@@ -78,16 +78,16 @@ int		execute(char **inputs, t_data *data)
 	stat(inputs[0], &statounet);
 	if ((statounet.st_mode & S_IXUSR) &&
 	(execve(inputs[0], &inputs[0], data->env) != -1))
-			return (1);
+			return (0);
 	else if (index >= 0)
 	{
-		if (execute_2(inputs, data))
-			return (1);
+		if (!execute_2(inputs, data))
+			return (0);
 	}
-	return (0);
+	return (1);
 }
 
-int		handle_exec(char **inputs, t_data *data)
+void	handle_exec(char **inputs, t_data *data)
 {
 	pid_t	pid;
 	int		status;
@@ -96,8 +96,8 @@ int		handle_exec(char **inputs, t_data *data)
 	pid = fork();
 	if (pid == 0)
 	{
-		if (!execute(inputs, data))
-			exit(EXIT_FAILURE);
+		if (execute(inputs, data) != 0)
+			exit(errno);
 		exit(EXIT_SUCCESS);
 	}
 	else if (pid < 0)
@@ -108,5 +108,5 @@ int		handle_exec(char **inputs, t_data *data)
 		if (waitpid(pid, &status, 0) != pid)
 			status = -1;
 	}
-	return (pid);
+	g_status = WEXITSTATUS(status);
 }
