@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 12:35:13 by gsmets            #+#    #+#             */
-/*   Updated: 2021/01/30 13:47:09 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/01/31 17:10:23 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,15 +88,7 @@ void		parser_redir_quotes(char *str, int *i, char quote)
 
 void		should_escape(int *i, char *str)
 {
-	int	count;
-
-	count = 0;
-	while (str[(*i)] == '\\')
-	{
-		(*i)++;
-		count++;
-	}
-	if (count % 2)
+	if (str[(*i)] == '\\')
 		(*i)++;
 }
 
@@ -110,7 +102,6 @@ int			parser_redir(char **input_address, t_data *data)
 	str = *input_address;
 	while (str[++i])
 	{
-		should_escape(&i, str);
 		if (str[i] == '\'' || str[i] == '"')
 		{
 			quote = str[i];
@@ -122,6 +113,7 @@ int			parser_redir(char **input_address, t_data *data)
 			handle_redir(input_address, i, data);
 			return (1);
 		}
+		should_escape(&i, str);
 	}
 	return (0);
 }
