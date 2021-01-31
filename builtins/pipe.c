@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 15:50:16 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/30 13:05:51 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/01/31 14:23:40 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,25 @@
 **	coucou
 */
 
-int		handle_pipe(char *input1, char *input2, t_data *data)
+void	handle_parentps(char *input2, t_data *data, int pid, int *fds)
 {
 	int		oldfd;
+	int		status;
+
+	if (waitpid(pid, &status, 0) != pid)
+		exit(EXIT_FAILURE);
+	oldfd = dup(0);
+	dup2(fds[0], 0);
+	close(fds[0]);
+	close(fds[1]);
+	parser_start(input2, data);
+	dup2(oldfd, 0);
+}
+
+int		handle_pipe(char *input1, char *input2, t_data *data)
+{
 	pid_t	pid;
 	int		fds[2];
-	int		status;
 
 	if (pipe(fds) < 0)
 		exit(EXIT_FAILURE);
@@ -39,14 +52,7 @@ int		handle_pipe(char *input1, char *input2, t_data *data)
 	else
 	{
 		free(input1);
-		if (waitpid(pid, &status, 0) != pid)
-			exit(EXIT_FAILURE);
-		oldfd = dup(0);
-		dup2(fds[0], 0);
-		close(fds[0]);
-		close(fds[1]);
-		parser_start(input2, data);
-		dup2(oldfd, 0);
+		handle_parentps(input2, data, pid, fds);
 	}
 	return (1);
 }
