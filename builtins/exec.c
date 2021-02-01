@@ -6,7 +6,7 @@
 /*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 17:01:07 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/30 16:55:00 by tpons            ###   ########.fr       */
+/*   Updated: 2021/02/01 17:44:47 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,8 @@ int		check_exec(char **inputs, t_data *data)
 
 	i = 0;
 	statounet.st_mode = 0;
+	if (var_index("PATH=", data) == -1)
+		return (0);
 	index = var_index("PATH=", data);
 	paths = gen_paths(index, data, inputs[0]);
 	index = 0;
