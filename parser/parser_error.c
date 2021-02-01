@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 13:31:30 by gsmets            #+#    #+#             */
-/*   Updated: 2021/01/31 17:47:04 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/02/01 14:07:07 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ int		parser_error(char *str)
 		{
 			if (error_redir(str, &i, str[i]))
 			{
+				g_status = 1;
 				ft_putstr_fd("Error: wrong or unsupported redirection\n", 2);
 				return (1);
 			}
