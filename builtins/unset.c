@@ -6,7 +6,7 @@
 /*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 11:12:35 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/30 15:39:03 by tpons            ###   ########.fr       */
+/*   Updated: 2021/02/01 19:52:29 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,14 @@ void	handle_unset(char **inputs, t_data *data)
 	i = 1;
 	while (inputs[i])
 	{
-		index = var_index(inputs[i], data);
-		if (index > 0)
-			data->env = unset_env(data->env, index);
-		i++;
+		if (check_export(inputs[i]))
+		{
+			index = var_index(inputs[i], data);
+			if (index > 0)
+				data->env = unset_env(data->env, index);
+			i++;
+		}
+		else
+			return (error_sentence("unset: invalid identifier\n", 2));
 	}
 }
