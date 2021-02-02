@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 12:04:28 by tpons             #+#    #+#             */
-/*   Updated: 2021/02/01 18:21:38 by tpons            ###   ########.fr       */
+/*   Updated: 2021/02/02 12:45:34 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int		main(int ac, char **av, char **env)
 {
 	t_data	data;
 	int		gnl;
-	char	*user_input;
 
 	ac = 0;
 	av = NULL;
@@ -32,19 +31,19 @@ int		main(int ac, char **av, char **env)
 	data.fd_in = 0;
 	data.fd_out = 1;
 	g_status = 0;
+	g_user_input = NULL;
 	if (!data.env)
 		exit(EXIT_FAILURE);
 	while (1)
 	{
 		sig_init();
 		ft_putstr_fd("minishell> ", 2);
-		gnl = get_next_line(0, &user_input);
-		if (gnl == -1)
-			exit(EXIT_FAILURE);
-		else if (gnl == 0)
-			end_of_file(&data, user_input);
-		else if (gnl > 0)
-			parser_start(user_input, &data);
+		gnl = get_next_line(0, &g_user_input);
+		if (!*g_user_input)
+			end_of_file(&data, g_user_input);
+		else
+			parser_start(g_user_input, &data);
+		g_user_input = NULL;
 	}
 	return (0);
 }

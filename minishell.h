@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 12:03:49 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/31 15:48:21 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/02/02 11:41:29 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef	struct	s_data
 }				t_data;
 
 int				g_status;
+char			*g_user_input;
 
 int				envlen(char **env);
 void			free_env(char **env);
