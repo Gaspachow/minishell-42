@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 12:04:28 by tpons             #+#    #+#             */
-/*   Updated: 2021/02/02 12:45:34 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/02/02 12:55:47 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int		main(int ac, char **av, char **env)
 		sig_init();
 		ft_putstr_fd("minishell> ", 2);
 		gnl = get_next_line(0, &g_user_input);
-		if (!*g_user_input)
+		if (!gnl)
 			end_of_file(&data, g_user_input);
 		else
 			parser_start(g_user_input, &data);
