@@ -6,7 +6,7 @@
 /*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 11:12:35 by tpons             #+#    #+#             */
-/*   Updated: 2021/02/01 19:52:29 by tpons            ###   ########.fr       */
+/*   Updated: 2021/02/02 13:14:08 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,6 @@ void	handle_unset(char **inputs, t_data *data)
 			i++;
 		}
 		else
-			return (error_sentence("unset: invalid identifier\n", 2));
+			return (error_sentence("unset: invalid identifier\n", 1));
 	}
 }
