@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 17:45:05 by gsmets            #+#    #+#             */
-/*   Updated: 2021/01/31 16:47:41 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/02/02 16:24:52 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,20 +97,18 @@ char			*input_cleaner(char *str)
 		return (0);
 	clean_input = (char *)malloc((len + 1) * sizeof(char));
 	if (!clean_input)
-	{
-		free(str_start);
 		exit(EXIT_FAILURE);
-	}
 	input_copy(clean_input, str);
 	free(str_start);
 	return (clean_input);
 }
 
-int				parser_start(char *user_input, t_data *data)
+int				parser_start(char *input, t_data *data)
 {
 	char	*clean_input;
 
-	clean_input = input_cleaner(user_input);
+	clean_input = input_cleaner(input);
+	g_user_input = NULL;
 	if (clean_input == 0)
 	{
 		ft_putstr("This minishell does not support multiline\n");

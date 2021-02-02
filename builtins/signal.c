@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/23 14:32:04 by tpons             #+#    #+#             */
-/*   Updated: 2021/02/02 13:41:54 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/02/02 17:24:17 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ void	handle_sig(int sig)
 	if (sig == SIGINT)
 	{
 		g_status = 130;
-		free(g_user_input);
+		if (g_user_input)
+			free(g_user_input);
 		g_user_input = ft_strdup("\0");
 		write(2, "\n", 1);
 		ft_putstr_fd("minishell> ", 2);
@@ -39,7 +40,10 @@ void	handle_exec_sig(int sig)
 {
 	if (sig == SIGINT)
 	{
+		if (g_user_input)
+			free(g_user_input);
 		g_status = 130;
+		g_quit = 1;
 		write(2, "\n", 1);
 	}
 	else if (sig == SIGQUIT)

@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 19:01:43 by gsmets            #+#    #+#             */
-/*   Updated: 2021/01/31 17:53:34 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/02/02 16:08:02 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ void		close_fds(t_data *data)
 void		exit_pipe(t_data *data)
 {
 	free_inputs(data->env);
+	if (g_user_input)
+		free(g_user_input);
 	exit (EXIT_SUCCESS);
 }
 

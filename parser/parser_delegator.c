@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 15:47:26 by gsmets            #+#    #+#             */
-/*   Updated: 2021/01/21 15:17:52 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/02/02 16:47:34 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,11 @@ static int	parser_semi(char *input, int semi_pos, t_data *data)
 	new_input = ft_strdup(&input[semi_pos + 1]);
 	input[semi_pos - space] = '\0';
 	handle_basic(input, data, 0);
-	return (parser_start(new_input, data));
+	if (g_status != 130)
+		return (parser_start(new_input, data));
+	else
+		free(new_input);
+	return (0);
 }
 
 int			check_special(char **input, int *i, t_data *data)

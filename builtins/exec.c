@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 17:01:07 by tpons             #+#    #+#             */
-/*   Updated: 2021/02/01 17:44:47 by tpons            ###   ########.fr       */
+/*   Updated: 2021/02/02 17:15:11 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,8 +136,9 @@ void	handle_exec(char **inputs, t_data *data)
 	else
 	{
 		sig_exec_init();
-		if (waitpid(pid, &status, 0) != pid)
-			status = -1;
+		waitpid(pid, &status, 0);
 	}
 	g_status = WEXITSTATUS(status);
+	if (g_quit)
+		g_status = 130;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 15:50:16 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/31 14:23:40 by tpons            ###   ########.fr       */
+/*   Updated: 2021/02/02 17:34:15 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int		handle_pipe(char *input1, char *input2, t_data *data)
 	else
 	{
 		free(input1);
+		input1 = NULL;
 		handle_parentps(input2, data, pid, fds);
 	}
 	return (1);
