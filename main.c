@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 12:04:28 by tpons             #+#    #+#             */
-/*   Updated: 2021/02/02 12:55:47 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/02/02 13:44:12 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int		main(int ac, char **av, char **env)
 	data.fd_in = 0;
 	data.fd_out = 1;
 	g_status = 0;
-	g_user_input = NULL;
 	if (!data.env)
 		exit(EXIT_FAILURE);
 	while (1)
@@ -43,7 +42,6 @@ int		main(int ac, char **av, char **env)
 			end_of_file(&data, g_user_input);
 		else
 			parser_start(g_user_input, &data);
-		g_user_input = NULL;
 	}
 	return (0);
 }
