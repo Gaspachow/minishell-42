@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 12:35:13 by gsmets            #+#    #+#             */
-/*   Updated: 2021/01/31 17:10:23 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/02/03 15:01:13 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,12 +84,6 @@ void		parser_redir_quotes(char *str, int *i, char quote)
 			(*i)--;
 		(*i)++;
 	}
-}
-
-void		should_escape(int *i, char *str)
-{
-	if (str[(*i)] == '\\')
-		(*i)++;
 }
 
 int			parser_redir(char **input_address, t_data *data)

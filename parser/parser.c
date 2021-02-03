@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 17:45:05 by gsmets            #+#    #+#             */
-/*   Updated: 2021/02/02 16:24:52 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/02/03 14:46:03 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,8 @@ static int		input_len(char *str)
 	{
 		if (*str == ' ' && (*(str + 1) == ' ' || *(str + 1) == '\0'))
 			str++;
-		else if (*str == '\\')
-		{
-			str += 2;
+		else if (*str == '\\' && (str += 2))
 			i += 4;
-		}
 		else if (*str == '"' || *str == '\'')
 		{
 			quote = *(str++);

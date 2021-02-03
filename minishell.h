@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 12:03:49 by tpons             #+#    #+#             */
-/*   Updated: 2021/02/03 14:42:08 by tpons            ###   ########.fr       */
+/*   Updated: 2021/02/03 17:01:13 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ int				parser_delegator(char *input, t_data *data, int piped);
 int				parser_error(char *str);
 void			parser_variable(char **input_address, int *i, t_data *data);
 int				parser_redir(char **input_address, t_data *data);
+void			should_escape(int *i, char *str);
 void			handle_redir(char **input_address, int i, t_data *data);
 void			remove_redir_input(char **input_address, int i, int j);
 int				get_name_len(char *str);

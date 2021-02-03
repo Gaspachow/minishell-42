@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 13:31:30 by gsmets            #+#    #+#             */
-/*   Updated: 2021/02/01 14:07:07 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/02/03 14:49:32 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int		error_redir(char *str, int *i, char c)
 {
 	int count;
+
 	count = 0;
 	while (str[(*i)] == c)
 	{

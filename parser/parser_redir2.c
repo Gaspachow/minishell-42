@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 17:14:30 by gsmets            #+#    #+#             */
-/*   Updated: 2021/01/31 17:15:48 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/02/03 15:00:25 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	redir_to_append(char *str, int i, char **input, t_data *data)
 		j++;
 	filename = get_filename(&(str[j + 1]), &j);
 	remove_redir_input(input, i, j);
-	fd = open(filename, O_RDWR | O_CREAT | O_APPEND,  S_IRUSR | S_IWUSR);
+	fd = open(filename, O_RDWR | O_CREAT | O_APPEND, S_IRUSR | S_IWUSR);
 	free(filename);
 	dup2(fd, 1);
 	if (data->fd_out != 1)

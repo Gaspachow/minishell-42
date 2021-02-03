@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 12:35:13 by gsmets            #+#    #+#             */
-/*   Updated: 2021/01/31 17:22:04 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/02/03 15:08:34 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ static char		*dup_value(char *str)
 	j = 0;
 	while (str[i])
 	{
-		if (str[i] == '\\' || str[i] == '$' || str[i] == '"' || str[i] == '\'' ||
-			str[i] == '>' || str[i] == '<')
+		if (str[i] == '\\' || str[i] == '$' || str[i] == '"' ||
+			str[i] == '\'' || str[i] == '>' || str[i] == '<')
 			add_escaped_char(str, value, &i, &j);
 		else
 			value[j++] = str[i++];
