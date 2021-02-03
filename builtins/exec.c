@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 17:01:07 by tpons             #+#    #+#             */
-/*   Updated: 2021/02/02 17:15:11 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/02/03 14:37:23 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,30 +18,6 @@
 **	try executing strjoin(paths[i], inputs[0]) for every path existing
 **	if nothing happend return (error)
 */
-
-char	**gen_paths(int index, t_data *data, char *input)
-{
-	char	*str;
-	char	**paths;
-	char	*temp;
-	int		i;
-
-	i = 0;
-	str = ft_strdup(&data->env[index][5]);
-	paths = ft_split(str, ':');
-	free(str);
-	while (paths[i])
-	{
-		temp = paths[i];
-		paths[i] = ft_strjoin(paths[i], "/");
-		free(temp);
-		temp = paths[i];
-		paths[i] = ft_strjoin(paths[i], input);
-		free(temp);
-		i++;
-	}
-	return (paths);
-}
 
 int		execute_2(char **inputs, t_data *data)
 {
@@ -83,37 +59,6 @@ int		execute(char **inputs, t_data *data)
 			return (0);
 	}
 	return (1);
-}
-
-int		check_exec(char **inputs, t_data *data)
-{
-	int			i;
-	char		**paths;
-	int			index;
-	struct stat	statounet;
-
-	i = 0;
-	statounet.st_mode = 0;
-	if (var_index("PATH=", data) == -1)
-		return (0);
-	index = var_index("PATH=", data);
-	paths = gen_paths(index, data, inputs[0]);
-	index = 0;
-	stat(inputs[0], &statounet);
-	if (statounet.st_mode & S_IXUSR)
-		index = 1;
-	else
-	{
-		while (paths[i])
-		{
-			stat(paths[i], &statounet);
-			if (statounet.st_mode & S_IXUSR)
-				index = 1;
-			i++;
-		}
-	}
-	free_env(paths);
-	return (index);
 }
 
 void	handle_exec(char **inputs, t_data *data)

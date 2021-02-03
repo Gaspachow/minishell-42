@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/23 14:32:04 by tpons             #+#    #+#             */
-/*   Updated: 2021/02/02 17:24:17 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/02/03 14:28:54 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	handle_sig(int sig)
 		g_user_input = ft_strdup("\0");
 		write(2, "\n", 1);
 		ft_putstr_fd("minishell> ", 2);
-
 	}
 	else if (sig == SIGQUIT)
 		write(2, "\b\b  \b\b", 6);

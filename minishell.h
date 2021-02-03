@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 12:03:49 by tpons             #+#    #+#             */
-/*   Updated: 2021/02/02 17:10:42 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/02/03 14:42:08 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,12 @@ int				handle_basic(char *clean_input, t_data *data, int piped);
 void			handle_echo(char **args);
 void			handle_pwd(t_data *data);
 void			handle_cd(char **args, t_data *data);
-void			handle_exec(char **args, t_data *data);
 void			handle_env(char **env);
 void			handle_unset(char **inputs, t_data *data);
+
+char			**gen_paths(int index, t_data *data, char *input);
+int				check_exec(char **inputs, t_data *data);
+void			handle_exec(char **args, t_data *data);
 
 void			replace_var(char *new_var, t_data *data, int index);
 int				var_index(char *name, t_data *data);
