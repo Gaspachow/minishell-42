@@ -6,7 +6,7 @@
 /*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 17:01:07 by tpons             #+#    #+#             */
-/*   Updated: 2021/02/03 14:37:23 by tpons            ###   ########.fr       */
+/*   Updated: 2021/02/04 17:11:50 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int		execute(char **inputs, t_data *data)
 	statounet.st_mode = 0;
 	index = var_index("PATH=", data);
 	stat(inputs[0], &statounet);
-	if ((statounet.st_mode & S_IXUSR) &&
+	if (is_relative(inputs[0]) && (statounet.st_mode & S_IXUSR) &&
 	(execve(inputs[0], &inputs[0], data->env) != -1))
 		return (0);
 	else if (index >= 0)
