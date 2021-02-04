@@ -6,7 +6,7 @@
 /*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 14:26:22 by tpons             #+#    #+#             */
-/*   Updated: 2021/02/03 15:13:29 by tpons            ###   ########.fr       */
+/*   Updated: 2021/02/04 09:27:54 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,10 @@ int		check_exec_path(char **inputs, t_data *data)
 	{
 		stat(paths[i], &statounet);
 		if ((statounet.st_mode & S_IXUSR) && !(statounet.st_mode & __S_IFDIR))
+		{
+			free_env(paths);
 			return (1);
+		}
 		i++;
 	}
 	free_env(paths);
