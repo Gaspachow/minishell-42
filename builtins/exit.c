@@ -6,7 +6,7 @@
 /*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/28 15:33:18 by tpons             #+#    #+#             */
-/*   Updated: 2021/02/04 16:23:29 by tpons            ###   ########.fr       */
+/*   Updated: 2021/02/04 16:52:10 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int		is_number(char *str)
 	int	i;
 
 	i = 0;
+	if (str[i] == '-')
+		i++;
 	while (str[i])
 	{
 		if (!ft_isdigit(str[i]))
@@ -45,7 +47,7 @@ void	handle_exit(char **inputs, t_data *data)
 			if (g_status > 255)
 				g_status = 255;
 			else if (g_status < 0)
-				g_status = 0;
+				g_status = 255;
 		}
 		else
 			error_sentence("\t\tminishell: numeric argument is required\n", 2);
