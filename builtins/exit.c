@@ -6,7 +6,7 @@
 /*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/28 15:33:18 by tpons             #+#    #+#             */
-/*   Updated: 2021/02/04 16:52:10 by tpons            ###   ########.fr       */
+/*   Updated: 2021/02/04 22:14:30 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	handle_exit(char **inputs, t_data *data)
 			error_sentence("\t\tminishell: numeric argument is required\n", 2);
 	}
 	free_env(inputs);
+	free(data->pwd);
 	free_env(data->env);
 	exit(g_status);
 }

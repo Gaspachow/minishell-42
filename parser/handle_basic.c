@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_basic.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 19:01:43 by gsmets            #+#    #+#             */
-/*   Updated: 2021/02/03 14:38:09 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/02/04 22:35:46 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void		exit_pipe(t_data *data)
 	free_inputs(data->env);
 	if (g_user_input)
 		free(g_user_input);
+	free(data->pwd);
 	exit(EXIT_SUCCESS);
 }
 

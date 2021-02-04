@@ -6,7 +6,7 @@
 /*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 12:03:49 by tpons             #+#    #+#             */
-/*   Updated: 2021/02/04 17:10:38 by tpons            ###   ########.fr       */
+/*   Updated: 2021/02/04 22:07:28 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef	struct	s_data
 	char		**env;
 	int			fd_in;
 	int			fd_out;
+	char		*pwd;
 }				t_data;
 
 int				g_status;
@@ -49,10 +50,14 @@ char			**input_split(char *str);
 
 int				handle_basic(char *clean_input, t_data *data, int piped);
 void			handle_echo(char **args);
-void			handle_pwd(t_data *data);
 void			handle_cd(char **args, t_data *data);
-void			handle_env(char **env);
 void			handle_unset(char **inputs, t_data *data);
+
+char			**export_env(char **old_env, char *export);
+void			handle_env(char **env);
+
+int				change_pwd(t_data *data, char *input);
+void			handle_pwd(t_data *data);
 
 int				is_relative(char *str);
 char			**gen_paths(int index, t_data *data, char *input);

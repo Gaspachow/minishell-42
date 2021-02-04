@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 12:04:28 by tpons             #+#    #+#             */
-/*   Updated: 2021/02/02 17:15:28 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/02/04 22:12:08 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	end_of_file(t_data *data, char *user_input)
 {
 	free_env(data->env);
 	free(user_input);
+	free(data->pwd);
 	ft_putstr_fd("exit\n", 2);
 	exit(EXIT_SUCCESS);
 }
@@ -28,6 +29,7 @@ int		main(int ac, char **av, char **env)
 	ac = 0;
 	av = NULL;
 	data.env = dup_env(env);
+	data.pwd = getcwd(NULL, 0);
 	data.fd_in = 0;
 	data.fd_out = 1;
 	g_status = 0;

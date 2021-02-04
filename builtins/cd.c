@@ -6,7 +6,7 @@
 /*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 13:15:19 by tpons             #+#    #+#             */
-/*   Updated: 2021/01/30 13:32:58 by tpons            ###   ########.fr       */
+/*   Updated: 2021/02/04 21:15:20 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,68 +20,27 @@
 
 int		cd_minus(t_data *data)
 {
-	char	*buf;
-	char	*pwd;
-	char	*oldpwd;
-
-	if (var_index("PWD=", data) < 0 || var_index("OLDPWD=", data) < 0 ||
+	if (var_index("OLDPWD=", data) < 0 ||
 	chdir((strchr(data->env[var_index("OLDPWD=", data)], '=') + 1)) == -1)
 		return (0);
-	oldpwd = ft_strjoin("OLD", data->env[var_index("PWD=", data)]);
-	replace_var(oldpwd, data, var_index("OLDPWD=", data));
-	free(oldpwd);
-	buf = getcwd(NULL, 0);
-	if (!buf)
-		exit(EXIT_FAILURE);
-	pwd = ft_strjoin("PWD=", buf);
-	free(buf);
-	replace_var(pwd, data, var_index(pwd, data));
-	free(pwd);
+	change_pwd(data, NULL);
 	return (1);
 }
 
 int		cd_alone(t_data *data)
 {
-	char	*buf;
-	char	*pwd;
-	char	*oldpwd;
-
 	if (var_index("HOME=", data) < 0 ||
-	chdir((strchr(data->env[var_index("HOME=", data)], '=') + 1)) == -1 ||
-	var_index("PWD=", data) < 0 || var_index("OLDPWD=", data) < 0)
+	chdir((strchr(data->env[var_index("HOME=", data)], '=') + 1)) == -1)
 		return (0);
-	oldpwd = ft_strjoin("OLD", data->env[var_index("PWD=", data)]);
-	replace_var(oldpwd, data, var_index("OLDPWD=", data));
-	free(oldpwd);
-	buf = getcwd(NULL, 0);
-	if (!buf)
-		exit(EXIT_FAILURE);
-	pwd = ft_strjoin("PWD=", buf);
-	free(buf);
-	replace_var(pwd, data, var_index(pwd, data));
-	free(pwd);
+	change_pwd(data, NULL);
 	return (1);
 }
 
 int		cd_path(char **args, t_data *data)
 {
-	char	*buf;
-	char	*pwd;
-	char	*oldpwd;
-
-	if (chdir(args[1]) == -1 || var_index("PWD=", data) < 0 ||
-	var_index("OLDPWD=", data) < 0)
+	if (chdir(args[1]) == -1)
 		return (0);
-	oldpwd = ft_strjoin("OLD", data->env[var_index("PWD=", data)]);
-	replace_var(oldpwd, data, var_index("OLDPWD=", data));
-	free(oldpwd);
-	buf = getcwd(NULL, 0);
-	if (!buf)
-		exit(EXIT_FAILURE);
-	pwd = ft_strjoin("PWD=", buf);
-	free(buf);
-	replace_var(pwd, data, var_index(pwd, data));
-	free(pwd);
+	change_pwd(data, args[1]);
 	return (1);
 }
 
@@ -92,12 +51,12 @@ void	handle_cd(char **args, t_data *data)
 	else if (!args[1])
 	{
 		if (!cd_alone(data))
-			return (error_sentence("cd: HOME||PWD||OLDPWD: is undefined\n", 1));
+			return (error_sentence("cd: HOME: is undefined\n", 1));
 	}
 	else if (ft_strcmp(args[1], "-") == 0)
 	{
 		if (!cd_minus(data))
-			return (error_sentence("cd: OLDPWD||PWD is undefined\n", 1));
+			return (error_sentence("cd: OLDPWD is undefined\n", 1));
 	}
 	else
 	{
