@@ -6,15 +6,11 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 15:50:16 by tpons             #+#    #+#             */
-/*   Updated: 2021/02/02 17:34:15 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/02/04 14:08:13 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-/*
-**	coucou
-*/
 
 void	handle_parentps(char *input2, t_data *data, int pid, int *fds)
 {
@@ -23,6 +19,8 @@ void	handle_parentps(char *input2, t_data *data, int pid, int *fds)
 
 	if (waitpid(pid, &status, 0) != pid)
 		exit(EXIT_FAILURE);
+	free(g_user_input);
+	g_user_input = NULL;
 	oldfd = dup(0);
 	dup2(fds[0], 0);
 	close(fds[0]);
