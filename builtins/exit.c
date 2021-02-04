@@ -6,7 +6,7 @@
 /*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/28 15:33:18 by tpons             #+#    #+#             */
-/*   Updated: 2021/02/01 19:22:32 by tpons            ###   ########.fr       */
+/*   Updated: 2021/02/04 13:48:04 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ void	handle_exit(char **inputs, t_data *data)
 	if (inputs[1] && is_number(inputs[1]))
 	{
 		g_status = ft_atoi(inputs[1]);
-		if (g_status > 126)
-			g_status = 126;
+		if (g_status > 255)
+			g_status = 255;
 		else if (g_status < 0)
 			g_status = 0;
 	}
