@@ -6,7 +6,7 @@
 /*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/28 15:33:18 by tpons             #+#    #+#             */
-/*   Updated: 2021/02/04 13:48:04 by tpons            ###   ########.fr       */
+/*   Updated: 2021/02/04 16:23:29 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,21 @@ int		is_number(char *str)
 void	handle_exit(char **inputs, t_data *data)
 {
 	g_status = 0;
-	if (inputs[1] && is_number(inputs[1]))
+	if (inputs[1])
 	{
-		g_status = ft_atoi(inputs[1]);
-		if (g_status > 255)
-			g_status = 255;
-		else if (g_status < 0)
-			g_status = 0;
+		if (is_number(inputs[1]))
+		{
+			if (inputs[2])
+				return (error_sentence("\tminishell: too many argument\n", 2));
+			g_status = ft_atoi(inputs[1]);
+			if (g_status > 255)
+				g_status = 255;
+			else if (g_status < 0)
+				g_status = 0;
+		}
+		else
+			error_sentence("\t\tminishell: numeric argument is required\n", 2);
 	}
-	else if (inputs[1])
-		error_sentence("\t\tminishell: numeric argument is required\n", 2);
 	free_env(inputs);
 	free_env(data->env);
 	exit(g_status);
