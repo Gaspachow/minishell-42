@@ -1,0 +1,160 @@
+---- Test commands for each part of the subject ----
+
+- SIMPLE COMMAND:
+/bin/ls
+clear
+
+- ARGUMENTS:
+ls .
+ls ..
+ls parser
+cat correction/test_commands
+grep bin correction/test_commands
+
+
+- ECHO:
+echo
+echo -n
+echo -n -n -n ok
+echo ok bonjour
+echo salut coucou Woop woop -n
+
+- EXIT (don't forget to relaunch minishell after each exit, test with echo $? in bash after each exit):
+exit
+exit 130
+exit wow
+exit 1 yo
+exit 12 49
+exit 255
+
+
+- RETURN VALUE OF PROCESS:
+ls
+echo $?
+
+ls oegohe
+echo $?
+
+echo cool
+echo $?
+
+./minishell
+exit 42
+echo $?
+
+- SEMICOLONS:
+ls . ; ls .. ; cat correction/test_commands ; ls parser
+cat ; cat ; echo -n "salut " ; echo cher correcteur ; ls
+cat;cat;echo -n "salut "; echo cher correcteur ;ls
+
+
+- SIGNALS (blocking command to test):
+cat
+grep
+./minishell
+
+- DOUBLE QUOTES:
+echo "bonjour l'ami"
+echo "wowie!"
+echo "allez bonjour ""trop bien" ok" salut"
+echo " wow \" top \\" "test du \test \ \\ ok \" \" \' "
+
+- ENV:
+env
+env | grep PATH
+
+- EXPORT:
+export test=ok
+echo $test
+export test
+echo $test
+export test=diff
+echo $test
+
+- UNSET :
+env | grep test
+unset test
+env | grep test
+echo $test
+
+- ENV VARIABLE:
+echo $PATH
+export ok="woooow salut! ok..."
+echo $ok
+export ok="-YO-"
+echo " topitop $ok cool \$ok cool \\$ok \\\$ok"
+
+- CD and PWD:
+cd ..
+ls
+pwd
+cd minishell
+ls
+pwd
+cd
+ls
+pwd
+cd -
+ls
+pwd
+ls parser
+pwd ..
+pwd parser
+pwd .
+ls
+
+- Relative PATH:
+./minishell
+exit
+cd parser
+../minishell
+exit
+cd ..
+
+- ENV PATH:
+ls
+clear
+cat main.c
+wc
+awk
+env | grep PATH
+unset PATH
+ls
+wc
+cat
+export PATH=(include here multiple directories previous env | grep PATH printed)
+
+- SIMPLE QUOTES:
+echo 'coco'
+echo 'coco \\ wow $ok'
+echo ' salut " hoho ''ok ok'
+echo ''
+cat ''
+echo ' ok ; wow ; cat ; ls ; echo $ok'
+
+- REDIRECTION:
+echo bonjour > fichier
+cat < fichier
+cat < fichier > test
+cat < test >> fichier
+cat < test
+cat < fichier
+cat < test < test < test < test < test < test
+cat < test < test < test < test < fichier
+cat < test > a1 > a2 >> a3 > a4 >> a5 > a6
+
+- PIPES:
+cat a6 | grep bonjour
+cat main.c | grep int
+cat correction/test_commands | grep cat
+ls | cat | grep m
+ls pjoqfpoj | grep bla | cat
+cat main.c | grep char > mainchar.txt
+ls | cat > ls.txt
+ls | cat | cat >> ls.txt
+cat < ls.txt | grep m
+
+- CRAZY:
+fohreogharpgh
+cat main.c parser/parser.c parser/parser_delegator.c parser/input_split.c ; echo wow wowow w w w w w w w w w  w w w w w w  w w w w w w  w w w w  w w w  w w w w  w w ok o k ok ok o ko k ok ok o ko k ok ok o ko k ok ok o ko k ok ok o ko k okkk
+

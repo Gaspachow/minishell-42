@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_basic.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 19:01:43 by gsmets            #+#    #+#             */
-/*   Updated: 2021/02/04 22:35:46 by tpons            ###   ########.fr       */
+/*   Updated: 2021/02/05 16:29:03 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 
 void		choose_action(char **inputs, t_data *data)
 {
+	if (!data->redir)
+	{
+		data->redir = 1;
+		return ;
+	}
 	if (!ft_strcmp(inputs[0], "echo"))
 		handle_echo(inputs);
 	else if (!ft_strcmp(inputs[0], "pwd"))

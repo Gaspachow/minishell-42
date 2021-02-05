@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 12:04:28 by tpons             #+#    #+#             */
-/*   Updated: 2021/02/05 13:13:36 by tpons            ###   ########.fr       */
+/*   Updated: 2021/02/05 16:26:56 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	data_init(t_data *data, char **env)
 	data->pwd = getcwd(NULL, 0);
 	data->fd_in = 0;
 	data->fd_out = 1;
+	data->redir = 1;
 }
 
 int		main(int ac, char **av, char **env)

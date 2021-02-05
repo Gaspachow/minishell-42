@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 12:03:49 by tpons             #+#    #+#             */
-/*   Updated: 2021/02/04 22:07:28 by tpons            ###   ########.fr       */
+/*   Updated: 2021/02/05 16:26:37 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef	struct	s_data
 	int			fd_in;
 	int			fd_out;
 	char		*pwd;
+	int			redir;
 }				t_data;
 
 int				g_status;
@@ -43,6 +44,7 @@ int				g_quit;
 int				envlen(char **env);
 void			free_env(char **env);
 char			**dup_env(char **env);
+void			close_fds(t_data *data);
 
 int				parser_start(char *str, t_data *data);
 void			quote_len(char **str, int *i, char quote);
