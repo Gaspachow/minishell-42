@@ -6,7 +6,7 @@
 /*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 12:04:28 by tpons             #+#    #+#             */
-/*   Updated: 2021/02/04 22:12:08 by tpons            ###   ########.fr       */
+/*   Updated: 2021/02/05 13:13:36 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,14 @@ void	end_of_file(t_data *data, char *user_input)
 	exit(EXIT_SUCCESS);
 }
 
+void	data_init(t_data *data, char **env)
+{
+	data->env = dup_env(env);
+	data->pwd = getcwd(NULL, 0);
+	data->fd_in = 0;
+	data->fd_out = 1;
+}
+
 int		main(int ac, char **av, char **env)
 {
 	t_data	data;
@@ -28,10 +36,7 @@ int		main(int ac, char **av, char **env)
 
 	ac = 0;
 	av = NULL;
-	data.env = dup_env(env);
-	data.pwd = getcwd(NULL, 0);
-	data.fd_in = 0;
-	data.fd_out = 1;
+	data_init(&data, env);
 	g_status = 0;
 	g_user_input = NULL;
 	if (!data.env)
