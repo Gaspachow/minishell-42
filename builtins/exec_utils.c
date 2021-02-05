@@ -6,20 +6,11 @@
 /*   By: tpons <tpons@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 14:26:22 by tpons             #+#    #+#             */
-/*   Updated: 2021/02/04 17:11:17 by tpons            ###   ########.fr       */
+/*   Updated: 2021/02/05 14:23:26 by tpons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-int		is_relative(char *str)
-{
-	if (str[0] == '.' && str[1] == '/')
-		return (1);
-	if (str[0] == '.' && str[1] == '.' && str[2] == '/')
-		return (1);
-	return (0);
-}
 
 char	**gen_paths(int index, t_data *data, char *input)
 {
@@ -83,7 +74,7 @@ int		check_exec(char **inputs, t_data *data)
 	statounet.st_mode = 0;
 	ret = 0;
 	stat(inputs[0], &statounet);
-	if (is_relative(inputs[0]) && (statounet.st_mode & S_IXUSR) &&
+	if (ft_strchr(inputs[0], '/') && (statounet.st_mode & S_IXUSR) &&
 	!(statounet.st_mode & __S_IFDIR))
 		ret = 1;
 	else
