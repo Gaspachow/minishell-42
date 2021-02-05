@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 15:50:16 by tpons             #+#    #+#             */
-/*   Updated: 2021/02/04 14:08:13 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/02/05 16:02:28 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	handle_parentps(char *input2, t_data *data, int pid, int *fds)
 	close(fds[1]);
 	parser_start(input2, data);
 	dup2(oldfd, 0);
+	close(oldfd);
 }
 
 int		handle_pipe(char *input1, char *input2, t_data *data)
