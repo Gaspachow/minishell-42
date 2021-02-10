@@ -1,7 +1,7 @@
 # minishell-42
 tp0ns/gsmets - 42 school - group project
 
-# /!\ WIP - This project is under construction
+# Project validated - 100%
 
 # Description
 The existence of shells is linked to the very existence of IT.
